@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 24, 2020 at 08:50 PM
+-- Generation Time: Oct 25, 2020 at 10:42 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -89,17 +89,24 @@ INSERT INTO `genres` (`id`, `nama`, `status`) VALUES
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
-  `id_user` varchar(10) NOT NULL,
+  `id` int(11) NOT NULL,
   `username` varchar(150) NOT NULL,
   `email_user` varchar(150) NOT NULL,
   `password_user` varchar(150) NOT NULL,
   `alamat_user` varchar(150) DEFAULT NULL,
-  `telepon_user` int(11) DEFAULT NULL,
+  `telepon_user` varchar(13) DEFAULT NULL,
   `poin` int(11) DEFAULT NULL,
   `role_user` varchar(1) NOT NULL COMMENT '0=Admin\r\n1=User',
   `status_member` varchar(1) NOT NULL COMMENT '0=NonMember\r\n1=Member',
   `status_user` varchar(1) NOT NULL COMMENT '0=TidakAktif\r\n1=Aktif'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `email_user`, `password_user`, `alamat_user`, `telepon_user`, `poin`, `role_user`, `status_member`, `status_user`) VALUES
+(1, 'stefanie', 'stefanieangelina.sa@gmail.com', '$2y$10$2r93dqyg6oe0b4gZmT.QPetRYbnnPjRtabvl3fVoGL5eFBsQjek6i', 'Kapasari 51', '089529134567', NULL, '0', '0', '1');
 
 --
 -- Indexes for dumped tables
@@ -121,7 +128,7 @@ ALTER TABLE `genres`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id_user`),
+  ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email_user`);
 
 --
@@ -139,6 +146,12 @@ ALTER TABLE `books`
 --
 ALTER TABLE `genres`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

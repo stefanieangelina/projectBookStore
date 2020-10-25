@@ -155,13 +155,13 @@
                         </li>
                         <li class="active has-sub">
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-male"></i>Staff Master</a>
+                                <i class="fas fa-male"></i>Admin Master</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="index.html">Insert Staff</a>
+                                    <a href="/admin/insert">Insert Admin</a>
                                 </li>
                                 <li>
-                                    <a href="index2.html">List Staff</a>
+                                    <a href="/admin/list">List Admin</a>
                                 </li>
                             </ul>
                         </li>

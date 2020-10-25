@@ -47,7 +47,7 @@
         Purchase Price : <input type="number" class="form-control" name="harga_beli" min="0" value="0" required>
         Selling Price : <input type="number" class="form-control" name="harga_jual" min="0" value="0" required>
         Discount : <input type="number" class="form-control" name="diskon" min="0" value="0" required> <br/>
-        <button formaction="/book/insertBook" type="submit" class="btn btn-primary">Insert</button>
+        <button formaction="/book/insertBook" type="submit" class="btn btn-primary" style="float:right">Insert</button>
     </form>
 @endsection
 

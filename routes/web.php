@@ -73,3 +73,33 @@ Route::prefix("/genre")->group(function(){
     Route::get('/edit/{id}', 'GenreController@edit');
     Route::post('/edit/{id}', 'GenreController@edit');
 });
+
+Route::prefix("/admin")->group(function(){
+    // halaman list admin
+    Route::get('/list', 'AdminController@showAdmin')->name('AdminList');
+    Route::post('/list', 'AdminController@showAdmin')->name('AdminList');
+
+    // insert admin
+    Route::get('/insert', function () {
+        return view('admin.insert');
+    });
+    Route::post('/insert', function () {
+        return view('admin.insert');
+    });
+    Route::get('/insertAdmin', 'AdminController@insertAdmin');
+    Route::post('/insertAdmin', 'AdminController@insertAdmin');
+
+    // me-aktifkan kembali admin
+    Route::get('/active/{id}', 'AdminController@active');
+    Route::post('/active/{id}', 'AdminController@active');
+
+    // me-non-aktifkan admin
+    Route::get('/nonActive/{id}', 'AdminController@nonActive');
+    Route::post('/nonActive/{id}', 'AdminController@nonActive');
+
+    // mengedit admin
+    Route::get('/editForm/{id}', 'AdminController@editForm');
+    Route::post('/editForm/{id}', 'AdminController@editForm');
+    Route::get('/edit/{id}', 'AdminController@edit');
+    Route::post('/edit/{id}', 'AdminController@edit');
+});
