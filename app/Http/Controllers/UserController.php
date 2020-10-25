@@ -3,20 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Users;
+use App\User;
 
 class UserController extends Controller
 {
     public function showUser(){
-        $UserArr = Users::where('role_user', '1')
-                    ->get();
+        $UserArr = User::where('role', 'Customer')->withTrashed()->get();
 
         return \view('user.list', ['UserArr' => $UserArr]);
     }
 
     public function active(Request $req, $id){
-        $userUpdate= Users::where('id', $id)
-                ->update(['status_user' => 1]);
+        $userUpdate= User::where('id',$id)->restore();
 
         if($userUpdate){
             return redirect()
@@ -28,8 +26,7 @@ class UserController extends Controller
     }
 
     public function nonActive(Request $req, $id){
-        $userUpdate= Users::where('id', $id)
-                ->update(['status_user' => 0]);
+        $userUpdate= User::find($id)->delete();
 
         if($userUpdate){
             return redirect()

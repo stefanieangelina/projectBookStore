@@ -32,16 +32,16 @@
             @if(count($UserArr) > 0 )
                 @for ($i = 0; $i < count($UserArr); $i++)
                     <tr>
-                        <td>{{ $UserArr[$i]->username }}</td>
-                        <td>{{ $UserArr[$i]->alamat_user }}</td>
-                        <td>{{ $UserArr[$i]->telepon_user }}</td>
+                        <td>{{ $UserArr[$i]->name }}</td>
+                        <td>{{ $UserArr[$i]->address }}</td>
+                        <td>{{ $UserArr[$i]->phone }}</td>
                         <td>
                             <form method="POST">
                                 @csrf
                                 <button type="submit" formaction="/user/editForm/{{$UserArr[$i]->id}}" class="btn btn-warning">
                                     <i class="fas fa-edit"></i>
                                 </button>
-                                @if($UserArr[$i]->status_user == 0)
+                                @if($UserArr[$i]->trashed())
                                     <button type="submit" formaction="/user/active/{{$UserArr[$i]->id}}" class="btn btn-success">
                                         <i class="fas fa-check"></i>
                                     </button>

@@ -32,14 +32,14 @@
                 @for ($i = 0; $i < count($genreArr); $i++)
                     <tr>
                         <td>{{ $genreArr[$i]->id }}</td>
-                        <td>{{ $genreArr[$i]->nama }}</td>
+                        <td>{{ $genreArr[$i]->name }}</td>
                         <td>
                             <form method="POST">
                                 @csrf
                                 <button type="submit" formaction="/genre/editForm/{{$genreArr[$i]->id}}" class="btn btn-warning">
                                     <i class="fas fa-edit"></i>
                                 </button>
-                                @if($genreArr[$i]->status == 0)
+                                @if($genreArr[$i]->trashed())
                                     <button type="submit" formaction="/genre/active/{{$genreArr[$i]->id}}" class="btn btn-success">
                                         <i class="fas fa-check"></i>
                                     </button>

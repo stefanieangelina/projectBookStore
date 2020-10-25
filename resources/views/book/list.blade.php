@@ -32,11 +32,11 @@
         @if(count($BookArr) > 0 )
             @for ($i = 0; $i < count($BookArr); $i++)
                 <tr>
-                    <td>{{ $BookArr[$i]->nama }}</td>
-                    <td>{{ $BookArr[$i]->harga_beli }}</td>
-                    <td>{{ $BookArr[$i]->harga_jual }}</td>
-                    <td>{{ $BookArr[$i]->diskon }}</td>
-                    <td>{{ $BookArr[$i]->stok }}</td>
+                    <td>{{ $BookArr[$i]->name }}</td>
+                    <td>{{ $BookArr[$i]->buy_price }}</td>
+                    <td>{{ $BookArr[$i]->sell_price }}</td>
+                    <td>{{ $BookArr[$i]->discount }}</td>
+                    <td>{{ $BookArr[$i]->stock }}</td>
                     <td>
                         <form method="POST">
                             @csrf

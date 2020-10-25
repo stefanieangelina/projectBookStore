@@ -2,32 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Book;
 use Illuminate\Http\Request;
 use App\Books;
+use App\Genre;
 use App\Genres;
 
 class BookController extends Controller
 {
     public function insertForm(){
-        $genreArr = Genres::where('status', '1')
-                    ->get();
+        $genreArr = Genre::all();
 
         return \view('book.insert', ["genreArr" => $genreArr]);
     }
 
     public function insertBook(Request $req){
-        $newBook = new Books();
-        $newBook->nama = $req['nama'];
+        $newBook = new Book();
+        $newBook->name = $req['nama'];
         $newBook->genre_id = $req['genre'];
         $newBook->blurb = $req['blurb'];
-        $newBook->stok = $req['stok'];
-        $newBook->penulis = $req['penulis'];
+        $newBook->stock = $req['stok'];
+        $newBook->writer = $req['penulis'];
         $newBook->rating = $req['rating'];
-        $newBook->bahasa_id = $req['bahasa'];
-        $newBook->harga_beli = $req['harga_beli'];
-        $newBook->harga_jual = $req['harga_jual'];
-        $newBook->diskon = $req['diskon'];
-        $newBook->status = 1;
+        $newBook->language = $req['bahasa'];
+        $newBook->buy_price = $req['harga_beli'];
+        $newBook->sell_price = $req['harga_jual'];
+        $newBook->discount = $req['diskon'];
+        // $newBook->status = 1;
         $BookInsert = $newBook->save();
 
         $ext = $req->file("gambar")->getClientOriginalExtension();
@@ -35,7 +36,7 @@ class BookController extends Controller
         $req->file("gambar")->storeAs("images", $nama, "public");
 
         if($BookInsert){
-            $newBook->gambar_nama = $nama;
+            $newBook->image = $nama;
             $newBook->save();
 
             return redirect()
@@ -66,17 +67,17 @@ class BookController extends Controller
 
     public function edit(Request $req, $id){
         $BookUpdate = Books::findorFail($id);
-        $BookUpdate->nama = $req['nama'];
+        $BookUpdate->name = $req['nama'];
         $BookUpdate->genre_id = $req['genre'];
         $BookUpdate->blurb = $req['blurb'];
-        $BookUpdate->stok = $req['stok'];
-        $BookUpdate->penulis = $req['penulis'];
+        $BookUpdate->stock = $req['stok'];
+        $BookUpdate->writer = $req['penulis'];
         $BookUpdate->rating = $req['rating'];
-        $BookUpdate->bahasa_id = $req['bahasa'];
-        $BookUpdate->harga_beli = $req['harga_beli'];
-        $BookUpdate->harga_jual = $req['harga_jual'];
-        $BookUpdate->diskon = $req['diskon'];
-        $BookUpdate->status = 1;
+        $BookUpdate->language = $req['bahasa'];
+        $BookUpdate->buy_price = $req['harga_beli'];
+        $BookUpdate->sell_price = $req['harga_jual'];
+        $BookUpdate->discount = $req['diskon'];
+        // $BookUpdate->status = 1;
         $BookInsert = $BookUpdate->save();
 
         if ($req->file("gambar") != null) {
