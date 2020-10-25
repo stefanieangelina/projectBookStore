@@ -5,11 +5,11 @@
 @endsection
 
 @section('namaAdminLogin')
-
+Auth::user()->name;
 @endsection
 
 @section('namaAdminLogin2')
-
+Auth::user()->name;
 @endsection
 
 @section('emailAdminLogin')
@@ -32,9 +32,9 @@
             @if(count($AdminArr) > 0 )
                 @for ($i = 0; $i < count($AdminArr); $i++)
                     <tr>
-                        <td>{{ $AdminArr[$i]->username }}</td>
-                        <td>{{ $AdminArr[$i]->alamat_user }}</td>
-                        <td>{{ $AdminArr[$i]->telepon_user }}</td>
+                        <td>{{ $AdminArr[$i]->name }}</td>
+                        <td>{{ $AdminArr[$i]->address }}</td>
+                        <td>{{ $AdminArr[$i]->phone }}</td>
                         <td>
                             <form method="POST">
                                 @csrf

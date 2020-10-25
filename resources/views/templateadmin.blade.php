@@ -109,10 +109,10 @@
                                 </li> --}}
                             </ul>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a href="chart.html">
                                 <i class="fas fa-chart-bar"></i>Charts</a>
-                        </li>
+                        </li> --}}
                         <li class="active has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-book"></i>Book Master</a>

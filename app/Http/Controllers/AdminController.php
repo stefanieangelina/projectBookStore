@@ -9,14 +9,13 @@ class AdminController extends Controller
 {
     public function insertAdmin(Request $req){
         $newAdmin = new Users();
-        $newAdmin->username = $req['username'];
-        $newAdmin->email_user = $req['email'];
+        $newAdmin->name = $req['username'];
+        $newAdmin->email = $req['email'];
         $newAdmin->password_user = password_hash($req['pass'], PASSWORD_DEFAULT);
-        $newAdmin->alamat_user = $req['alamat'];
-        $newAdmin->telepon_user = $req['telepon'];
-        $newAdmin->role_user = '0';
-        $newAdmin->status_member = '0';
-        $newAdmin->status_user = 1;
+        $newAdmin->address = $req['alamat'];
+        $newAdmin->phone = $req['telepon'];
+        $newAdmin->role = 'Admin';
+        $newAdmin->isMember = '0';
         $AdminInsert = $newAdmin->save();
 
         if($AdminInsert){
@@ -31,7 +30,7 @@ class AdminController extends Controller
     }
 
     public function showAdmin(){
-        $AdminArr = Users::where('role_user', '0')
+        $AdminArr = Users::where('role', 'Admin')
                     ->get();
 
         return \view('admin.list', ['AdminArr' => $AdminArr]);
@@ -46,10 +45,11 @@ class AdminController extends Controller
 
     public function edit(Request $req, $id){
         $AdminUpdate = Users::findOrFail($id);
-        $AdminUpdate->email_user = $req['email'];
-        //AdminUpdate->password_user = password_hash($req['pass'], PASSWORD_DEFAULT);
-        $AdminUpdate->alamat_user = $req['alamat'];
-        $AdminUpdate->telepon_user = $req['telepon'];
+        //$AdminUpdate->name = $req['username'];
+        $AdminUpdate->email = $req['email'];
+        //$AdminUpdate->password_user = password_hash($req['pass'], PASSWORD_DEFAULT);
+        $AdminUpdate->address = $req['alamat'];
+        $AdminUpdate->phone = $req['telepon'];
         $AdminInsert = $AdminUpdate->save();
 
         if($AdminInsert){
@@ -65,7 +65,7 @@ class AdminController extends Controller
 
     public function active(Request $req, $id){
         $AdminUpdate= Users::where('id', $id)
-                ->update(['status_user' => 1]);
+                    ->restore();
 
         if($AdminUpdate){
             return redirect()
@@ -78,7 +78,9 @@ class AdminController extends Controller
 
     public function nonActive(Request $req, $id){
         $AdminUpdate= Users::where('id', $id)
-                ->update(['status_user' => 0]);
+                    ->delete();
+
+                //->update(['status_user' => 0]);
 
         if($AdminUpdate){
             return redirect()
