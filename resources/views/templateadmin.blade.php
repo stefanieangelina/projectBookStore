@@ -142,10 +142,10 @@
                                 <i class="fas fa-user"></i>User Master</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="index.html">User</a>
+                                    <a href="/user/list">User</a>
                                 </li>
                                 <li>
-                                    <a href="index2.html">VIP Member</a>
+                                    <a href="/vip/list">VIP Member</a>
                                 </li>
                             </ul>
                         </li>

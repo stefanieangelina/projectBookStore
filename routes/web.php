@@ -103,3 +103,17 @@ Route::prefix("/admin")->group(function(){
     Route::get('/edit/{id}', 'AdminController@edit');
     Route::post('/edit/{id}', 'AdminController@edit');
 });
+
+Route::prefix("/user")->group(function(){
+    // halaman list User
+    Route::get('/list', 'UserController@showUser')->name('UserList');
+    Route::post('/list', 'UserController@showUser')->name('UserList');
+
+    // me-aktifkan kembali User
+    Route::get('/active/{id}', 'UserController@active');
+    Route::post('/active/{id}', 'UserController@active');
+
+    // me-non-aktifkan User
+    Route::get('/nonActive/{id}', 'UserController@nonActive');
+    Route::post('/nonActive/{id}', 'UserController@nonActive');
+});

@@ -34,14 +34,14 @@ class AdminController extends Controller
         $AdminArr = Users::where('role_user', '0')
                     ->get();
 
-        return \view('Admin.list', ['AdminArr' => $AdminArr]);
+        return \view('admin.list', ['AdminArr' => $AdminArr]);
     }
 
     public function editForm($id){
         $Admin = Users::where('id', $id)
                 ->first();
 
-        return \view('Admin.edit', ['Admin' => $Admin]);
+        return \view('admin.edit', ['Admin' => $Admin]);
     }
 
     public function edit(Request $req, $id){

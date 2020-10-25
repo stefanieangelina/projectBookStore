@@ -9,7 +9,8 @@ use App\Genres;
 class BookController extends Controller
 {
     public function insertForm(){
-        $genreArr = Genres::get();
+        $genreArr = Genres::where('status', '1')
+                    ->get();
 
         return \view('book.insert', ["genreArr" => $genreArr]);
     }

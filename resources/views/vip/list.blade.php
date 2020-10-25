@@ -1,7 +1,7 @@
 @extends('templateadmin')
 
 @section('titlepage')
-    List Admin
+    Insert Genre
 @endsection
 
 @section('namaAdminLogin')
@@ -29,24 +29,24 @@
             </tr>
         </thead>
         <tbody>
-            @if(count($AdminArr) > 0 )
-                @for ($i = 0; $i < count($AdminArr); $i++)
+            @if(count($UserArr) > 0 )
+                @for ($i = 0; $i < count($UserArr); $i++)
                     <tr>
-                        <td>{{ $AdminArr[$i]->username }}</td>
-                        <td>{{ $AdminArr[$i]->alamat_user }}</td>
-                        <td>{{ $AdminArr[$i]->telepon_user }}</td>
+                        <td>{{ $UserArr[$i]->username }}</td>
+                        <td>{{ $UserArr[$i]->alamat_user }}</td>
+                        <td>{{ $UserArr[$i]->telepon_user }}</td>
                         <td>
                             <form method="POST">
                                 @csrf
-                                <button type="submit" formaction="/admin/editForm/{{$AdminArr[$i]->id}}" class="btn btn-warning">
+                                <button type="submit" formaction="/user/editForm/{{$UserArr[$i]->id}}" class="btn btn-warning">
                                     <i class="fas fa-edit"></i>
                                 </button>
-                                @if($AdminArr[$i]->status_user == 0)
-                                    <button type="submit" formaction="/admin/active/{{$AdminArr[$i]->id}}" class="btn btn-success">
+                                @if($UserArr[$i]->status_user == 0)
+                                    <button type="submit" formaction="/user/active/{{$UserArr[$i]->id}}" class="btn btn-success">
                                         <i class="fas fa-check"></i>
                                     </button>
                                 @else
-                                    <button type="submit" formaction="/admin/nonActive/{{$AdminArr[$i]->id}}" class="btn btn-danger">
+                                    <button type="submit" formaction="/user/nonActive/{{$UserArr[$i]->id}}" class="btn btn-danger">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 @endif
@@ -58,4 +58,5 @@
         </tbody>
     </table>
 @endsection
+
 
