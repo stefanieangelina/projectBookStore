@@ -126,3 +126,5 @@ Route::prefix("/user")->group(function(){
     Route::any('/nonActive/{id}', 'UserController@nonActive');
 
 });
+
+Route::view("/userPage", 'products');
