@@ -30,7 +30,7 @@
                 @endforeach
             </select>
     Blurb : <textarea name="blurb" class="form-control" value="{{ $Book->blurb }}" rows="5"></textarea>
-    Stock : <input type="number" class="form-control" min="0" value="{{ $Book->stok }}" name="stok" value="0" required>
+    Stock : <input type="number" class="form-control" min="0" value="{{ $Book->stock }}" name="stok" value="0" required>
     Writer : <input type="text" class="form-control" value="{{ $Book->writer }}" readonly>
     Rating : <input type="number" class="form-control" value="{{ $Book->rating }}" name="rating" min="0" max="5" value="0" required>
     Languange : <input type="text" class="form-control" value="{{ $Book->language }}" readonly>
