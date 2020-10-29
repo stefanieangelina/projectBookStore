@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Users;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
+    public function insertForm(){
+        $genreArr = Users::all();
+        $user  = Auth::user()->name;
+
+        return \view('admin.insert', ['userLogin' => $user]);
+    }
+
     public function insertAdmin(Request $req){
         $newAdmin = new Users();
         $newAdmin->name = $req['username'];
@@ -33,14 +41,19 @@ class AdminController extends Controller
         $AdminArr = Users::where('role', 'Admin')
                     ->get();
 
-        return \view('admin.list', ['AdminArr' => $AdminArr]);
+        $user  = Auth::user()->name;
+
+        return \view('admin.list', ['AdminArr' => $AdminArr,
+                                    'userLogin' => $user]);
     }
 
     public function editForm($id){
         $Admin = Users::where('id', $id)
                 ->first();
 
-        return \view('admin.edit', ['Admin' => $Admin]);
+        $user  = Auth::user()->name;
+
+        return \view('admin.edit', ['Admin' => $Admin, 'userLogin' => $user]);
     }
 
     public function edit(Request $req, $id){

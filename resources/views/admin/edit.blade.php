@@ -5,15 +5,11 @@
 @endsection
 
 @section('namaAdminLogin')
-Auth::user()->name;
+{{ $userLogin }}
 @endsection
 
 @section('namaAdminLogin2')
-Auth::user()->name;
-@endsection
-
-@section('emailAdminLogin')
-
+{{ $userLogin }}
 @endsection
 
 @section('content')

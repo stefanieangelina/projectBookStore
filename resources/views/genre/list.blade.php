@@ -1,15 +1,11 @@
 @extends('templateadmin')
 
 @section('namaAdminLogin')
-
+{{ $userLogin }}
 @endsection
 
 @section('namaAdminLogin2')
-
-@endsection
-
-@section('emailAdminLogin')
-
+{{ $userLogin }}
 @endsection
 
 @section('titlepage')

@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Genre;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GenreController extends Controller
 {
+    public function insertForm(){
+        $user  = Auth::user()->name;
+        return \view('genre.insert', ['userLogin' => $user]);
+    }
+
     public function insertGenre(Request $req){
         $newGenre = new Genre();
         $newGenre->name = $req['nama'];
@@ -26,15 +32,19 @@ class GenreController extends Controller
 
     public function showGenre(){
         $genreArr = Genre::withTrashed()->get();
+        $user  = Auth::user()->name;
 
-        return \view('genre.list', ['genreArr' => $genreArr]);
+        return \view('genre.list', ['genreArr' => $genreArr,
+                                    'userLogin' => $user]);
     }
 
     public function editForm($id){
         $genre = Genre::where('id', $id)
                     ->first();
+        $user  = Auth::user()->name;
 
-        return \view('genre.edit', ['genre' => $genre]);
+        return \view('genre.edit', ['genre' => $genre,
+                                    'userLogin' => $user]);
     }
 
     public function edit(Request $req, $id){

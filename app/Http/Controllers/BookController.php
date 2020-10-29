@@ -4,16 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Book;
 use Illuminate\Http\Request;
-use App\Books;
 use App\Genre;
-use App\Genres;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
     public function insertForm(){
         $genreArr = Genre::all();
+        $user  = Auth::user()->name;
 
-        return \view('book.insert', ["genreArr" => $genreArr]);
+        return \view('book.insert', ['genreArr' => $genreArr,
+                                    'userLogin' => $user]);
     }
 
     public function insertBook(Request $req){
@@ -50,23 +51,28 @@ class BookController extends Controller
     }
 
     public function showBook(){
-        $BookArr = Books::all();
+        $BookArr = Book::withTrashed()->get();
+        $user  = Auth::user()->name;
 
-        return \view('Book.list', ['BookArr' => $BookArr]);
+        return \view('Book.list', ['BookArr' => $BookArr,
+                                    'userLogin' => $user]);
     }
 
     public function editForm($id){
-        $genreArr = Genres::get();
+        $genreArr = Genre::get();
 
-        $Book = Books::where('id', $id)
+        $Book = Book::where('id', $id)
                     ->first();
 
+        $user  = Auth::user()->name;
+
         return \view('Book.edit', ['Book' => $Book,
-                                    'genreArr' => $genreArr]);
+                                    'genreArr' => $genreArr,
+                                    'userLogin' => $user]);
     }
 
     public function edit(Request $req, $id){
-        $BookUpdate = Books::findorFail($id);
+        $BookUpdate = Book::findorFail($id);
         $BookUpdate->name = $req['nama'];
         $BookUpdate->genre_id = $req['genre'];
         $BookUpdate->blurb = $req['blurb'];
@@ -99,8 +105,8 @@ class BookController extends Controller
     }
 
     public function active(Request $req, $id){
-        $BookUpdate = Books::where('id', $id)
-                ->update(['status' => 1 ]);
+        $BookUpdate = Book::where('id', $id)
+                    ->restore();
 
         if($BookUpdate){
             return redirect()
@@ -112,8 +118,8 @@ class BookController extends Controller
     }
 
     public function nonActive(Request $req, $id){
-        $BookUpdate = Books::where('id', $id)
-                ->update(['status' => 0 ]);
+        $BookUpdate = Book::where('id', $id)
+                    ->delete();
 
         if($BookUpdate){
             return redirect()

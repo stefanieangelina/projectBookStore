@@ -5,16 +5,13 @@
 @endsection
 
 @section('namaAdminLogin')
-
+{{ $userLogin }}
 @endsection
 
 @section('namaAdminLogin2')
-
+{{ $userLogin }}
 @endsection
 
-@section('emailAdminLogin')
-
-@endsection
 
 @section('pengumuman')
     @include('alert')

@@ -5,15 +5,11 @@
 @endsection
 
 @section('namaAdminLogin')
-
+{{ $userLogin }}
 @endsection
 
 @section('namaAdminLogin2')
-
-@endsection
-
-@section('emailAdminLogin')
-
+{{ $userLogin }}
 @endsection
 
 @section('pengumuman')
@@ -52,7 +48,7 @@
                             <button type="submit" formaction="/book/editForm/{{$BookArr[$i]->id}}" class="btn btn-warning">
                                 <i class="fas fa-edit"></i>
                             </button>
-                            @if($BookArr[$i]->status == 0)
+                            @if($BookArr[$i]->trashed())
                                 <button type="submit" formaction="/book/active/{{$BookArr[$i]->id}}" class="btn btn-success">
                                     <i class="fas fa-check"></i>
                                 </button>
