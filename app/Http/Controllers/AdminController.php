@@ -11,7 +11,7 @@ class AdminController extends Controller
         $newAdmin = new Users();
         $newAdmin->name = $req['username'];
         $newAdmin->email = $req['email'];
-        $newAdmin->password_user = password_hash($req['pass'], PASSWORD_DEFAULT);
+        $newAdmin->password = password_hash($req['pass'], PASSWORD_DEFAULT);
         $newAdmin->address = $req['alamat'];
         $newAdmin->phone = $req['telepon'];
         $newAdmin->role = 'Admin';
@@ -19,11 +19,11 @@ class AdminController extends Controller
         $AdminInsert = $newAdmin->save();
 
         if($AdminInsert){
-            return redirect()
+            return \redirect()
                 ->back()
                 ->with("success", "Succsess insert new Admin!");
         } else {
-            return redirect()
+            return \redirect()
                 ->back()
                 ->with("error", "Failed add new Admin!");
         }
@@ -53,11 +53,11 @@ class AdminController extends Controller
         $AdminInsert = $AdminUpdate->save();
 
         if($AdminInsert){
-            return redirect()
+            return \redirect()
                 ->route('AdminList')
                 ->with("success", "Succsess update Admin!");
         } else {
-            return redirect()
+            return \redirect()
                 ->route('AdminList')
                 ->with("error", "Failed update Admin!");
         }
@@ -67,13 +67,8 @@ class AdminController extends Controller
         $AdminUpdate= Users::where('id', $id)
                     ->restore();
 
-        if($AdminUpdate){
-            return redirect()
-                ->back();
-        } else {
-            return redirect()
-                ->back();
-        }
+        return \redirect()
+            ->back();
     }
 
     public function nonActive(Request $req, $id){
@@ -82,12 +77,7 @@ class AdminController extends Controller
 
                 //->update(['status_user' => 0]);
 
-        if($AdminUpdate){
-            return redirect()
-                ->back();
-        } else {
-            return redirect()
-                ->back();
-        }
+        return \redirect()
+            ->back();
     }
 }

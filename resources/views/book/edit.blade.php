@@ -1,7 +1,7 @@
 @extends('templateadmin')
 
 @section('titlepage')
-    Insert Book
+    Edit Book
 @endsection
 
 @section('namaAdminLogin')
@@ -15,8 +15,6 @@
 @section('emailAdminLogin')
 
 @endsection
-
-@include('alert')
 
 @section('content')
 <br/>

@@ -16,17 +16,19 @@
 
 @endsection
 
-@include('alert')
+@section('pengumuman')
+    @include('alert')
+@endsection
 
 @section('content')
     <br/>
     <form method="post">
         @csrf
-        Username : <input type="text" class="form-control" name="username" required>
+        Name : <input type="text" class="form-control" name="username" required>
         Email : <input type="email" class="form-control" name="email" required>
         Password : <input type="password" class="form-control" name="pass" required>
-        Alamat : <input type="text" class="form-control" name="alamat" required>
-        Telepon : <input type="tel" class="form-control" name="telepon" required> <br/>
+        Address : <input type="text" class="form-control" name="alamat" required>
+        Telephone : <input type="tel" class="form-control" name="telepon" required> <br/>
         <button type="submit" formaction="/admin/insertAdmin" class="btn btn-primary">Insert</button>
     </form>
 @endsection

@@ -16,7 +16,9 @@
 
 @endsection
 
-@include('alert')
+@section('pengumuman')
+    @include('alert')
+@endsection
 
 @section('content')
     <form method="post">

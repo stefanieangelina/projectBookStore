@@ -343,6 +343,7 @@
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <center> <h1>@yield('titlepage')</h1></center>
+                        @yield('pengumuman')
                         @yield('content')
                     </div>
                 </div>

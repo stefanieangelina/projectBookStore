@@ -16,7 +16,9 @@
 
 @endsection
 
-@include('alert')
+@section('pengumuman')
+    @include('alert')
+@endsection
 
 @section('content')
     <table class="table table-hover table-light">
@@ -41,13 +43,13 @@
                                 <button type="submit" formaction="/admin/editForm/{{$AdminArr[$i]->id}}" class="btn btn-warning">
                                     <i class="fas fa-edit"></i>
                                 </button>
-                                @if($AdminArr[$i]->status_user == 0)
-                                    <button type="submit" formaction="/admin/active/{{$AdminArr[$i]->id}}" class="btn btn-success">
-                                        <i class="fas fa-check"></i>
-                                    </button>
-                                @else
+                                @if($AdminArr[$i]->deleted_at == NULL)
                                     <button type="submit" formaction="/admin/nonActive/{{$AdminArr[$i]->id}}" class="btn btn-danger">
                                         <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                @else
+                                    <button type="submit" formaction="/admin/active/{{$AdminArr[$i]->id}}" class="btn btn-success">
+                                        <i class="fas fa-check"></i>
                                     </button>
                                 @endif
                             </form>

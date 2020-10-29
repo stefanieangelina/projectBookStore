@@ -1,7 +1,7 @@
 @extends('templateadmin')
 
 @section('titlepage')
-    Insert Genre
+    Edit Genre
 @endsection
 
 @section('namaAdminLogin')
