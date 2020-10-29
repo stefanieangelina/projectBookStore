@@ -21,6 +21,10 @@
 @endsection
 
 @section('content')
+    <form method="post">
+        @csrf
+        <button type="submit" formaction="/admin/insert" class="btn btn-info" style="float: right">Add New Admin</button>
+    </form>
     <table class="table table-hover table-light">
         <thead>
             <tr>

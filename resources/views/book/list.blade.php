@@ -21,6 +21,11 @@
 @endsection
 
 @section('content')
+<form method="post">
+    @csrf
+    <button type="submit" formaction="/book/insert" class="btn btn-info" style="float: right">Add New Book</button>
+</form>
+
 <table class="table table-hover table-light">
     <thead>
         <tr>
