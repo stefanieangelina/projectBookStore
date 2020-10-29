@@ -5,15 +5,11 @@
 @endsection
 
 @section('namaAdminLogin')
-
+    {{ $userLogin }}
 @endsection
 
 @section('namaAdminLogin2')
-
-@endsection
-
-@section('emailAdminLogin')
-
+    {{ $userLogin }}
 @endsection
 
 @section('pengumuman')
@@ -40,16 +36,16 @@
                         <td>
                             <form method="POST">
                                 @csrf
-                                <button type="submit" formaction="/user/editForm/{{$UserArr[$i]->id}}" class="btn btn-warning">
+                                {{-- <button type="submit" formaction="/user/editForm/{{$UserArr[$i]->id}}" class="btn btn-warning">
                                     <i class="fas fa-edit"></i>
-                                </button>
+                                </button> --}}
                                 @if($UserArr[$i]->trashed())
                                     <button type="submit" formaction="/user/active/{{$UserArr[$i]->id}}" class="btn btn-success">
                                         <i class="fas fa-check"></i>
                                     </button>
                                 @else
                                     <button type="submit" formaction="/user/nonActive/{{$UserArr[$i]->id}}" class="btn btn-danger">
-                                        <i class="fas fa-trash-alt"></i>
+                                        <i class="	fas fa-minus-circle"></i>
                                     </button>
                                 @endif
                             </form>

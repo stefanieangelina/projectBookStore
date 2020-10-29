@@ -66,9 +66,6 @@ Route::prefix("/genre")->group(function(){
     Route::any('/list', 'GenreController@showGenre')->name('genreList');
 
     // insert genre
-    // Route::any('/insert', function () {
-    //     return view('genre.insert');
-    // });
     Route::any('/insert', 'GenreController@insertForm');
     Route::any('/insertGenre', 'GenreController@insertGenre');
 
@@ -94,9 +91,6 @@ Route::prefix("/admin")->group(function(){
 
 
     // insert admin
-    // Route::any('/insert', function () {
-    //     return view('admin.insert');
-    // });
     Route::any('/insert', 'AdminController@insertForm');
     Route::any('/insertAdmin', 'AdminController@insertAdmin');
 

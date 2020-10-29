@@ -32,9 +32,9 @@
             @if(count($UserArr) > 0 )
                 @for ($i = 0; $i < count($UserArr); $i++)
                     <tr>
-                        <td>{{ $UserArr[$i]->username }}</td>
-                        <td>{{ $UserArr[$i]->alamat_user }}</td>
-                        <td>{{ $UserArr[$i]->telepon_user }}</td>
+                        <td>{{ $UserArr[$i]->name }}</td>
+                        <td>{{ $UserArr[$i]->address }}</td>
+                        <td>{{ $UserArr[$i]->phone }}</td>
                         <td>
                             <form method="POST">
                                 @csrf
@@ -47,7 +47,7 @@
                                     </button>
                                 @else
                                     <button type="submit" formaction="/user/nonActive/{{$UserArr[$i]->id}}" class="btn btn-danger">
-                                        <i class="fas fa-trash-alt"></i>
+                                        <i class="	fas fa-minus-circle"></i>
                                     </button>
                                 @endif
                             </form>

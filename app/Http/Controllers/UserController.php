@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     public function showUser(){
         $UserArr = User::where('role', 'Customer')->withTrashed()->get();
+        $user  = Auth::user()->name;
 
-        return \view('user.list', ['UserArr' => $UserArr]);
+        return \view('user.list', ['UserArr' => $UserArr, 'userLogin' => $user]);
     }
 
     public function active(Request $req, $id){
