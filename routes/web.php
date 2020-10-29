@@ -43,12 +43,9 @@ Route::prefix("/book")->group(function(){
     // halaman list buku
     Route::any('/list', 'BookController@showBook')->name('BookList');
 
-
     // insert Book
     Route::any('/insert', 'BookController@insertForm');
-
     Route::any('/insertBook', 'BookController@insertBook');
-
 
     // me-aktifkan kembali Book
     Route::any('/active/{id}', 'BookController@active');
@@ -124,3 +121,24 @@ Route::prefix("/user")->group(function(){
 });
 
 Route::view("/userPage", 'products');
+
+Route::prefix("/vip")->group(function(){
+    // halaman list buku
+    Route::any('/list', 'VipController@showVip')->name('VipList');
+
+
+    // insert Book
+    // Route::any('/insert', 'BookController@insertForm');
+    // Route::any('/insertBook', 'BookController@insertBook');
+
+
+    // // me-aktifkan kembali Book
+    // Route::any('/active/{id}', 'BookController@active');
+
+    // // me-non-aktifkan Book
+    // Route::any('/nonActive/{id}', 'BookController@nonActive');
+
+    // // mengedit Book
+    // Route::any('/editForm/{id}', 'BookController@editForm');
+    // Route::any('/edit/{id}', 'BookController@edit');
+});

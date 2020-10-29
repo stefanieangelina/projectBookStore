@@ -3,20 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Users;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
     public function insertForm(){
-        $genreArr = Users::all();
+        $genreArr = User::all();
         $user  = Auth::user()->name;
 
         return \view('admin.insert', ['userLogin' => $user]);
     }
 
     public function insertAdmin(Request $req){
-        $newAdmin = new Users();
+        $newAdmin = new User();
         $newAdmin->name = $req['username'];
         $newAdmin->email = $req['email'];
         $newAdmin->password = password_hash($req['pass'], PASSWORD_DEFAULT);
@@ -38,7 +38,7 @@ class AdminController extends Controller
     }
 
     public function showAdmin(){
-        $AdminArr = Users::where('role', 'Admin')
+        $AdminArr = User::where('role', 'Admin')
                     ->get();
 
         $user  = Auth::user()->name;
@@ -48,7 +48,7 @@ class AdminController extends Controller
     }
 
     public function editForm($id){
-        $Admin = Users::where('id', $id)
+        $Admin = User::where('id', $id)
                 ->first();
 
         $user  = Auth::user()->name;
@@ -57,7 +57,7 @@ class AdminController extends Controller
     }
 
     public function edit(Request $req, $id){
-        $AdminUpdate = Users::findOrFail($id);
+        $AdminUpdate = User::findOrFail($id);
         //$AdminUpdate->name = $req['username'];
         $AdminUpdate->email = $req['email'];
         //$AdminUpdate->password_user = password_hash($req['pass'], PASSWORD_DEFAULT);
@@ -77,7 +77,7 @@ class AdminController extends Controller
     }
 
     public function active(Request $req, $id){
-        $AdminUpdate= Users::where('id', $id)
+        $AdminUpdate= User::where('id', $id)
                     ->restore();
 
         return \redirect()
@@ -85,7 +85,7 @@ class AdminController extends Controller
     }
 
     public function nonActive(Request $req, $id){
-        $AdminUpdate= Users::where('id', $id)
+        $AdminUpdate= User::where('id', $id)
                     ->delete();
 
                 //->update(['status_user' => 0]);
