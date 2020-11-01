@@ -22,24 +22,28 @@
 </div> --}}
 
 <div class="row">
-    @for ($i = 0; $i<count($arrBuku); $i++)
-        <div class="col-xl-3 col-sm-5 col-11" style="margin:1%">
-            <div class="card">
-                <h1 style="text-align: center;"></h1>
-                <div class="content">
-                    <img src="{{ asset('') }}" style="width:100%; height:100%">
-                    <h3></h3>
-                    <p></p>
-                    <p>Harga: <b>Rp.</b></p>
-                    <hr>
-                    <form method="post">
-                        @csrf
-                        <button formaction="/" class="btn btn-success" style="float: right; margin:15px">Pilih</button>
-                    </form>
-                    </div>
+    @isset($arrBuku)
+        @foreach ($arrBuku as $buku)
+            <div class="col-xl-3 col-sm-5 col-11" style="margin:1%">
+                <div class="card">
+                    <h1 style="text-align: center;"></h1>
+                    <div class="content">
+                        <img src="/storage/images/{{ $buku->image }}" style="width:100%; height:100%">
+                        <h3></h3>
+                        <p></p>
+                        <p>Harga: <b>Rp.{{$buku->sell_price}}</b></p>
+                        <hr>
+                        <form method="post">
+                            @csrf
+                            <button formaction="/" class="btn btn-success" style="float: right; margin:15px">Pilih</button>
+                        </form>
+                        </div>
+                </div>
             </div>
-        </div>
-    @endfor
+        @endforeach
+    @endisset
+
+
 </div>
 
 {{-- <div id="container">

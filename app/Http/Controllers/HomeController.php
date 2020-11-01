@@ -28,7 +28,7 @@ class HomeController extends Controller
         $user  = Auth::user()->name;
         // echo ($user);
         $arrBuku = Book::get();
-
-        return view('home', ['arrBuku', $arrBuku]);
+        // dd($arrBuku);
+        return view('home', ['arrBuku'=> $arrBuku]);
     }
 }

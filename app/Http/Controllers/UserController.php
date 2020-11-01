@@ -16,7 +16,7 @@ class UserController extends Controller
     }
 
     public function active(Request $req, $id){
-        $userUpdate= User::where('id',$id)->restore();
+        $userUpdate = User::where('id',$id)->restore();
 
         if($userUpdate){
             return redirect()
@@ -28,7 +28,7 @@ class UserController extends Controller
     }
 
     public function nonActive(Request $req, $id){
-        $userUpdate= User::find($id)->delete();
+        $userUpdate = User::find($id)->delete();
 
         if($userUpdate){
             return redirect()
@@ -37,5 +37,12 @@ class UserController extends Controller
             return redirect()
                 ->back();
         }
+    }
+    public function landingPage(Request $req)
+    {
+        if(Auth::user()->role==='Admin')
+        return redirect('admin');
+        if(Auth::user()->role==='Customer')
+        return redirect('home');
     }
 }

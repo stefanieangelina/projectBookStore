@@ -1,6 +1,7 @@
 <?php
 
 use App\Genres;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+Route::get('/', 'UserController@landingPage')->middleware('auth');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 
@@ -30,14 +33,6 @@ Route::get('/authadmin', function () {
     dd('berhasil');
     return view('admin');
 })->middleware('role:Admin');
-
-Route::get('/', function () {
-    if(Auth::user()->role==='Admin')
-        return view('admin');
-    if(Auth::user()->role==='Customer')
-        return view('home');
-})->middleware('auth');
-
 
 Route::prefix("/book")->group(function(){
     // halaman list buku
