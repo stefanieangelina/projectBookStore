@@ -78,7 +78,12 @@ Route::prefix("/genre")->group(function(){
 });
 
 Route::prefix("/admin")->group(function(){
+
+    // Route::any('/showblank', 'AdminController@showBlank')->name('AdminBlank');
+
+    Route::any('/', 'AdminController@showAdmin')->name('AdminDashboard');
     // halaman list admin
+
     Route::any('/list', 'AdminController@showAdmin')->name('AdminList');
 
 
