@@ -79,10 +79,10 @@
     @yield('pengumuman')
 
     <div class="d-flex justify-content-center justify-content-sm-center justify-content-xl-center">
-        <div class="row" style="width:100%; block;margin: auto;">
+        {{-- <div class="row" style="width:100%; block;margin: auto;"> --}}
         {{-- <div class="container-fluid" style="padding: 15px"> --}}
             @yield('content')
-        </div>
+        {{-- </div> --}}
     </div>
 </body>
 </html>

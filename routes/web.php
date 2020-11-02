@@ -53,6 +53,7 @@ Route::prefix("/book")->group(function(){
     Route::any('/edit/{id}', 'BookController@edit');
 
     Route::any('/addToCart/{id}', 'BookController@addToCart');
+    Route::any('/viewDetail/{id}', 'BookController@viewDetail');
 });
 
 Route::prefix("/genre")->group(function(){

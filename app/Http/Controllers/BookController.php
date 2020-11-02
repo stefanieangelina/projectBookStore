@@ -133,4 +133,12 @@ class BookController extends Controller
             ->back()
             ->with("success", "Succsess add to cart!");
     }
+
+    public function viewDetail(Request $req, $id){
+        $user  = Auth::user()->name;
+        $Book = Book::where('id', $id)->get();
+
+        return view('layouts.detailDisplay', ['userLogin' => $user,
+                                                'Book' => $Book]);
+    }
 }
