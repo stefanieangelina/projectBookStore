@@ -33,11 +33,11 @@
                 <div class="card">
                     <h1 style="text-align: center;"></h1>
                     <div class="content">
-                        <img src="/storage/images/{{ $buku->image }}" style="width:100%; height:100%">
+                        <img src="{{ asset('/storage/images/'.$buku->image) }}" style="width:100%; height:100%">
                         <b>{{ $buku->name }}</b>
                         <p></p>
                         <p>Rating: {{$buku->rating}} </p>
-                        <p>Harga: Rp.{{$buku->sell_price}}</p>
+                        <p>Harga: Rp. {{ number_format($buku->sell_price) }}</p>
                         <hr>
                         <form method="post">
                             @csrf
