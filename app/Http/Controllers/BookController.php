@@ -77,9 +77,7 @@ class BookController extends Controller
         $BookUpdate->genre_id = $req['genre'];
         $BookUpdate->blurb = $req['blurb'];
         $BookUpdate->stock = $req['stok'];
-        $BookUpdate->writer = $req['penulis'];
         $BookUpdate->rating = $req['rating'];
-        $BookUpdate->language = $req['bahasa'];
         $BookUpdate->buy_price = $req['harga_beli'];
         $BookUpdate->sell_price = $req['harga_jual'];
         $BookUpdate->discount = $req['diskon'];
@@ -128,5 +126,11 @@ class BookController extends Controller
             return redirect()
                 ->back();
         }
+    }
+
+    public function addToCart(Request $req, $id){
+        return redirect()
+            ->back()
+            ->with("success", "Succsess add to cart!");
     }
 }

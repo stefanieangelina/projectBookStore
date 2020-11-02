@@ -18,12 +18,12 @@
     @csrf
     ID : <input type="text" class="form-control" value="{{ $Book->id }}" readonly>
     Title : <input type="text" class="form-control" name="nama" value="{{ $Book->name }}" required>
-    Genre : <select class="form-control" value="{{ $Book->genre }}" name="genre">
+    Genre : <select class="form-control" value="{{ $Book->genre_id }}" name="genre">
                 @foreach ($genreArr as $g)
                     <option value="{{ $g->id }}">{{ $g->name }}</option>
                 @endforeach
             </select>
-    Blurb : <textarea name="blurb" class="form-control" value="{{ $Book->blurb }}" rows="5"></textarea>
+    Blurb : <textarea name="blurb" class="form-control" value="{{ $Book->blurb }}" rows="10"></textarea>
     Stock : <input type="number" class="form-control" min="0" value="{{ $Book->stock }}" name="stok" value="0" required>
     Writer : <input type="text" class="form-control" value="{{ $Book->writer }}" readonly>
     Rating : <input type="number" class="form-control" value="{{ $Book->rating }}" name="rating" min="0" max="5" value="0" required>

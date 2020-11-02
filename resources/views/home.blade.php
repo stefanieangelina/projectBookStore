@@ -21,7 +21,11 @@
     </div>
 </div> --}}
 
-<div class="row">
+@section('pengumuman')
+    @include('alert')
+@endsection
+
+@section('content')
     @isset($arrBuku)
         @foreach ($arrBuku as $buku)
             <div class="col-xl-3 col-sm-5 col-11" style="margin:1%">
@@ -29,22 +33,21 @@
                     <h1 style="text-align: center;"></h1>
                     <div class="content">
                         <img src="/storage/images/{{ $buku->image }}" style="width:100%; height:100%">
-                        <h3></h3>
-                        <p></p>
+                        <b>{{ $buku->name }}</b>
+                        <p>Rating: {{$buku->rating}} </p>
                         <p>Harga: <b>Rp.{{$buku->sell_price}}</b></p>
                         <hr>
                         <form method="post">
                             @csrf
-                            <button formaction="/" class="btn btn-success" style="float: right; margin:15px">Pilih</button>
+                            <button formaction="/book/addToCart/{{ $buku->id }}" class="btn btn-success" style="float: right; margin:15px">Add to Cart</button>
                         </form>
-                        </div>
+                    </div>
                 </div>
             </div>
         @endforeach
     @endisset
+@endsection
 
-
-</div>
 
 {{-- <div id="container">
     <div id="hr"></div>
@@ -149,4 +152,4 @@
         </div>
     </div>
 </div> --}}
-@endsection
+

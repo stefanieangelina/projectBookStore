@@ -38,6 +38,10 @@
                         <input type="submit" name="" id="btnToSearch" value="Search" class="btn btn-info">
                     </form>
 
+                    <form method="post">
+                        <button type="submit" formaction="" class="btn btn-link"><i class='fab fa-opencart'></i></button>
+                    </form>
+
                     <!-- Authentication Links -->
                     @guest
                         <li class="nav-item">
@@ -72,8 +76,10 @@
         </div>
     </nav>
 
+    @yield('pengumuman')
+
     <div class="d-flex justify-content-center justify-content-sm-center justify-content-xl-center">
-        <div class="row">
+        <div class="row" style="width:100%; block;margin: auto;">
         {{-- <div class="container-fluid" style="padding: 15px"> --}}
             @yield('content')
         </div>
