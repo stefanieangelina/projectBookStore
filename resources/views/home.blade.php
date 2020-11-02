@@ -35,8 +35,8 @@
                     <div class="content">
                         <img src="{{ asset('/storage/images/'.$buku->image) }}" style="width:100%; height:100%">
                         <b>{{ $buku->name }}</b>
-                        <p></p>
-                        <p>Rating: {{$buku->rating}} </p>
+                        <p>{{ $buku->writer }}</p>
+                        <p><span class="fa fa-star"  style="font-size:15px;"> {{$buku->rating}} </span> </p>
                         <p>Harga: Rp. {{ number_format($buku->sell_price) }}</p>
                         <hr>
                         <form method="post">
