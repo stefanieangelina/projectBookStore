@@ -32,6 +32,13 @@
                         @endfor
                     </div>
                     <h6 style="float: left ; margin-right : 2px">Harga: Rp. {{ number_format($detailBuku->sell_price) }}</h6>
+
+                    <br/> <br/>
+                    <form method="post">
+                        @csrf
+                        <button formaction="/book/addToCart/{{ $detailBuku->id }}" class="btn btn-success" style="float: center; margin:5px">Add to Cart</button>
+                        <button formaction="/book/addToWishlist/{{ $detailBuku->id }}" class="btn btn-primary" style="float: center; margin:5px">Add to Wishlist</button>
+                    </form>
                 </div>
             </div>
         @endsection

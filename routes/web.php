@@ -152,3 +152,5 @@ Route::any('/deleteCart/{id}', 'CartController@deleteCart');
 
 Route::any("/showWishlist", 'WishlistController@showWishlist');
 Route::any("/deleteWishlist/{id}", 'WishlistController@deleteWishlist');
+
+Route::any('/search', 'PageController@search');

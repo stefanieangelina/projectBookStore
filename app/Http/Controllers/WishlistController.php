@@ -14,6 +14,7 @@ class WishlistController extends Controller
 
         $arrWishlist = Wishlist::where('user_id', $userId)
                         ->where('book_id', $id)
+                        ->where('deleted_at', NULL)
                         ->count();
 
         if($arrWishlist == 0){

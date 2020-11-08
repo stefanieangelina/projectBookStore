@@ -75,6 +75,9 @@
         </div>
     </nav>
 
+    <center><h1>@yield('judul')</h1></center>
+    <br/>
+
     @yield('pengumuman')
 
     <div class="d-flex justify-content-center justify-content-sm-center justify-content-xl-center">

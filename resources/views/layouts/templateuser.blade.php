@@ -38,8 +38,8 @@
                 <ul class="navbar-nav ml-auto">
                     <form method="POST" id="formSearch">
                         @csrf
-                        <input type="search" placeholder="Cari Judul Buku" id="searchBox" name="" style="font-size:18px;">
-                        <input type="submit" name="" id="btnToSearch" value="Search" class="btn btn-info">
+                        <input type="search" placeholder="Cari Judul Buku" id="searchBox" name="keyword" style="font-size:18px;">
+                        <input type="submit" formaction="/search" id="btnToSearch" value="Search" class="btn btn-info">
                     </form>
 
                     <form method="post">

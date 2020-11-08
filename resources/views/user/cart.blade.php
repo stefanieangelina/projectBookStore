@@ -1,4 +1,4 @@
-@extends('layouts.templateuser')
+@extends('layouts.templateDetailBuku')
 
 @section('pengumuman')
     @include('alert')

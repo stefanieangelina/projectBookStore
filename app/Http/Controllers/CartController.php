@@ -13,13 +13,35 @@ class CartController extends Controller
     public function AddToCart($id){
         $userId  = Auth::user()->id;
 
-        $newCart = new Cart;
-        $newCart->qty = 1;
-        $newCart->user_id = $userId;
-        $newCart->book_id = $id;
-        $newCart->save();
+        $cart = Cart::where('book_id', $id)
+                    ->where('user_id', $userId)
+                    ->where('deleted_at', NULL)
+                    ->count();
 
-        return \redirect()->back();
+        if($cart == 0){
+            $newCart = new Cart;
+            $newCart->qty = 1;
+            $newCart->user_id = $userId;
+            $newCart->book_id = $id;
+            $newCart->save();
+
+            return \redirect()
+                    ->back()
+                    ->with('success', 'Success add book to cart!');
+        } else {
+            $cart = Cart::where('book_id', $id)
+                    ->where('user_id', $userId)
+                    ->where('deleted_at', NULL)
+                    ->first();
+            $qty = $cart->qty;
+            $qty++;
+
+            Cart::where('id', $id)
+                ->update(array('qty' => $qty));
+
+            return \redirect()
+                    ->back();
+        }
     }
 
     public function showCart(){

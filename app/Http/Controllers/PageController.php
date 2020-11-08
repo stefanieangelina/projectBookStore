@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PageController extends Controller
 {
@@ -12,5 +14,23 @@ class PageController extends Controller
                         ->first();
 
         return \view('detailDisplay', ['detailBuku' => $detailBuku]);
+    }
+
+    public function search(Request $req){
+        $keyword = '%'.strtolower($req->keyword).'%';
+
+        $arrBuku = Book::get();
+
+        /*if($keyword == ""){
+            $arrBuku = Book::get();
+        } else {
+            // SELECT * FROM books
+            // where lower(name) like '%t%';
+
+            //$arrBuku = Book::where('LOWER(name)', 'like', '%'. $keyword. '%')
+                   // ->get();
+        }*/
+
+        return view('home', ['arrBuku'=> $arrBuku]);
     }
 }
