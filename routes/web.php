@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// INDEX //
 Auth::routes();
 
 Route::get('/', 'UserController@landingPage')->middleware('auth');
@@ -34,8 +33,6 @@ Route::get('/authadmin', function () {
     return view('admin');
 })->middleware('role:Admin');
 
-
-// ADMIN //
 Route::prefix("/book")->group(function(){
     // halaman list buku
     Route::any('/list', 'BookController@showBook')->name('BookList');
@@ -54,8 +51,9 @@ Route::prefix("/book")->group(function(){
     Route::any('/editForm/{id}', 'BookController@editForm');
     Route::any('/edit/{id}', 'BookController@edit');
 
-    Route::any('/addToCart/{id}', 'BookController@addToCart');
-    Route::any('/viewDetail/{id}', 'BookController@viewDetail');
+    Route::any('/addToCart/{id}', 'CartController@AddToCart');
+    Route::any('/viewDetail/{id}', 'PageController@ViewDetail');
+    Route::any('/addToWishlist/{id}', 'WishlistController@AddToWishList');
 });
 
 Route::prefix("/genre")->group(function(){
@@ -147,7 +145,10 @@ Route::prefix("/vip")->group(function(){
     // Route::any('/edit/{id}', 'BookController@edit');
 });
 
+Route::any("/showCart", 'CartController@showCart');
+Route::any('/qtyUp/{id}', 'CartController@qtyUp');
+Route::any('/qtyDown/{id}', 'CartController@qtyDown');
+Route::any('/deleteCart/{id}', 'CartController@deleteCart');
 
-// USER //
-Route::get('/viewDetail/{$id}', 'PageController@ViewDetail');
-
+Route::any("/showWishlist", 'WishlistController@showWishlist');
+Route::any("/deleteWishlist/{id}", 'WishlistController@deleteWishlist');

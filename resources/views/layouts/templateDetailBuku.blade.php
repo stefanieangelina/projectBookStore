@@ -11,98 +11,77 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-    <title>Bukuku.com</title>
+    <title>MyBook.com</title>
 </head>
 <body>
-    <div id="container">
-        <div id="hr"></div>        
-        <!-- Modal untuk login-->
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content" id="modal">
-                <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle" style="color: white">Login</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true" id="x">&times;</span>
-                </button>
-                </div>
-                <form>
-                    @csrf
-                    <div class="modal-body" style="background-color: white">
-                        
-                            
-                            <input type="text" id="inputBox" name="" placeholder=" Username"><br>
-                            <!-- cetak error validate-->
-                            <br>
-                            <input type="password"id="inputBox" name=""  placeholder=" Password">
-                            <!-- cetak error validate-->
-                            <br><br>
-                            Belum Mendaftar?  <a href="">Daftar</a>
-                        
-                    </div> 
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <input type="submit" class="btn btn-primary" value="Login">
-                    </div>
-                </form>
-            </div>
-            </div>
-        </div>
-        <!----->       
-        <div id="header">
-            <div id="headerContent">
-                <img alt="Logo"  id="logo" src="{{url('/images/logoFAI.png')}}">
-                <form method="POST" action="" id="formSearch">
-                    @csrf
-                    <input type="search" placeholder="Cari Produk, Judul Buku, Penulis" id="searchBox" name="">
-                    <input type="submit" name="" id="btnToSearch" value="Search" class="btn btn-outline-danger">
-                </form>
-            </div>
-        </div>
-        <div id="content">
-            <div id="genreBar">
-                <div id="nav">
-                    <div id="navBox">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-outline-danger border-0 dropdown-toggle" style="color :white;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Genres
-                            </button>
-                            <div class="dropdown-menu">
-                                <!--- di for untuk genre ---->
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
+    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url('/') }}">
+                MyBook.com
+                {{-- <img alt="Logo"  id="logo" src="{{url('/images/logoFAI.png')}}"> --}}
+            </a>
+            <form method="post">
+                @csrf
+                <button type="submit" formaction="/showWishlist" class="btn btn-link" style="font-size:21px;  color:black">Wishlist</button>
+            </form>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Left Side Of Navbar -->
+                <ul class="navbar-nav mr-auto">
+
+                </ul>
+
+                <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav ml-auto">
+                    <form method="post">
+                        @csrf
+                        <button type="submit" formaction="/showCart" class="btn btn-link"><i class='fab fa-opencart' style="font-size:25px;"></i></button>
+                    </form>
+
+                    <!-- Authentication Links -->
+                    @guest
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </li>
+                        @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
+                        @endif
+                    @else
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }}
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
                             </div>
-                        </div>
-                    </div>
-                    <div id="navBox2">
-                        <a class="btn btn-outline-danger border-0" style="width: 100px ;color :white;" href="#" role="button">Home</a>
-                    </div>
-                    <div id="navBox2">
-                        <a class="btn btn-outline-danger border-0" style="width: 100px;color :white;" href="#" role="button">Top Chart</a>
-                    </div>
-                    <div id="navBox2">
-                        <a class="btn btn-outline-danger border-0" style="width: 100px;color :white;" href="#" role="button">New Arrival</a>
-                    </div>
-                    <div id="navBox2">
-                    </div>
-                    <div id="navBox">
-                        <a class="btn btn-outline-danger border-0" style="width: 100px;color :white;" data-toggle="modal" data-target="#exampleModalCenter" role="button">Login</a>
-                    </div>
-                    <div id="navBox2">
-                        
-                        <a class="btn btn-outline-danger border-0 notif" id="icon" style="width: 80px ;height :45px " href="#" role="button">
-                            <i id="icon" class="fas fa-shopping-bag" style="font-size:30px;color:white ; padding-top :-10px !important"></i>
-                            <span class="num"><b>2</b></span>
-                        </a>
-                    </div>
-                </div>
+                        </li>
+                    @endguest
+                </ul>
             </div>
-            <div id="contentContainer">
-                @yield('isi')
-                <div id="hr"></div>
-            </div>
-        </div>       
+        </div>
+    </nav>
+
+    @yield('pengumuman')
+
+    <div class="d-flex justify-content-center justify-content-sm-center justify-content-xl-center">
+        {{-- <div class="row" style="width:100%; block;margin: auto;"> --}}
+        {{-- <div class="container-fluid" style="padding: 15px"> --}}
+            @yield('content')
+        {{-- </div> --}}
     </div>
 </body>
 </html>

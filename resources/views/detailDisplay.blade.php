@@ -8,21 +8,30 @@
 </head>
 <body> --}}
 
-    @extends('layouts.templateuser')
-    {{-- @extends('templateDetailBuku') --}}
+    {{-- @extends('layouts.templateuser') --}}
+    @extends('layouts.templateDetailBuku')
 
         @section('content')
+        @php
+            $rating = $detailBuku->rating;
+            $genre = DB::table('genres')
+                        ->where('id', $detailBuku->genre_id)
+                        ->first();
+        @endphp
+
             <div id="boxContent" style="min-height: 980px" >
-                <h3>{{ $detailBuku->judul }}</h3>
                 <div id="card" class="rounded" >
-                    <img id="coverBuku"src="{{ asset('/storage/images/'.$buku->image) }}" class="rounded"style="width: 150px; height:230px">
+                    <center><img id="coverBuku"src="{{ asset('/storage/images/'.$detailBuku->image) }}" class="rounded"></center>
+                    <br/>
+                    <h3 style="margin-left : 2px">{{ $detailBuku->name }}</h3>
                     <h5 style="margin-left : 2px">{{ $detailBuku->writer }}</h5>
-                    <h6 style="margin-left : 2px">{{ $detailBuku->genre }}</h6><br>
+                    <h6 style="margin-left : 2px">{{ $genre->name }}</h6>
                     <div id="rating">
-                        <span class="fa fa-star checked"  style="font-size:10px;"></span>
-                        <span class="fa fa-star"  style="font-size:10px;"></span>
+                        @for ($i = 0; $i < $rating; $i++)
+                            <span class="fa fa-star checked"  style="font-size:10px;"></span>
+                        @endfor
                     </div>
-                    <h6 style="float: right ; margin-right : 2px">Harga: Rp. {{ number_format($buku->sell_price) }}</h6>
+                    <h6 style="float: left ; margin-right : 2px">Harga: Rp. {{ number_format($detailBuku->sell_price) }}</h6>
                 </div>
             </div>
         @endsection

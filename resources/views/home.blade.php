@@ -1,26 +1,5 @@
 @extends('layouts.templateuser')
 
-@section('content')
-{{-- <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
-                </div>
-            </div>
-        </div>
-    </div>
-</div> --}}
-
 @section('pengumuman')
     @include('alert')
 @endsection
@@ -41,9 +20,11 @@
                         <hr>
                         <form method="post">
                             @csrf
-                            <button formaction="/viewDetail/{{ $buku->id }}" class="btn btn-warning" style="float: right; margin:15px">View Detail</button>
-                            <button formaction="/addToCart/{{ $buku->id }}" class="btn btn-success" style="float: right; margin:15px">Add to Cart</button>
+                            <button formaction="/book/viewDetail/{{ $buku->id }}" class="btn btn-warning" style="float: right; margin:5px">View Detail</button>
+                            <button formaction="/book/addToCart/{{ $buku->id }}" class="btn btn-success" style="float: right; margin:5px">Add to Cart</button>
+                            <button formaction="/book/addToWishlist/{{ $buku->id }}" class="btn btn-primary" style="float: right; margin:5px">Add to Wishlist</button>
                         </form>
+                        <br/> <br/> <br/>
                     </div>
                 </div>
             </div>

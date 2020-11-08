@@ -20,6 +20,10 @@
                 MyBook.com
                 {{-- <img alt="Logo"  id="logo" src="{{url('/images/logoFAI.png')}}"> --}}
             </a>
+            <form method="post">
+                @csrf
+                <button type="submit" formaction="/showWishlist" class="btn btn-link" style="font-size:21px; color:black">Wishlist</button>
+            </form>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -34,12 +38,13 @@
                 <ul class="navbar-nav ml-auto">
                     <form method="POST" id="formSearch">
                         @csrf
-                        <input type="search" placeholder="Cari Produk, Judul Buku, Penulis" id="searchBox" name="">
+                        <input type="search" placeholder="Cari Judul Buku" id="searchBox" name="" style="font-size:18px;">
                         <input type="submit" name="" id="btnToSearch" value="Search" class="btn btn-info">
                     </form>
 
                     <form method="post">
-                        <button type="submit" formaction="" class="btn btn-link"><i class='fab fa-opencart'></i></button>
+                        @csrf
+                        <button type="submit" formaction="/showCart" class="btn btn-link"><i class='fab fa-opencart' style="font-size:25px;"></i></button>
                     </form>
 
                     <!-- Authentication Links -->
@@ -78,11 +83,16 @@
 
     @yield('pengumuman')
 
+    <center><h1>@yield('judul')</h1></center>
+    <br/>
+
     <div class="d-flex justify-content-center justify-content-sm-center justify-content-xl-center">
         {{-- <div class="row" style="width:100%; block;margin: auto;"> --}}
         {{-- <div class="container-fluid" style="padding: 15px"> --}}
             @yield('content')
         {{-- </div> --}}
     </div>
+
+    @yield('footer')
 </body>
 </html>
