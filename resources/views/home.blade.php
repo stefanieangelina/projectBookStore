@@ -41,8 +41,8 @@
                         <hr>
                         <form method="post">
                             @csrf
-                            <button formaction="/buku/viewDetail/{{ $buku->id }}" class="btn btn-warning" style="float: right; margin:15px">View Detail</button>
-                            <button formaction="/buku/addToCart/{{ $buku->id }}" class="btn btn-success" style="float: right; margin:15px">Add to Cart</button>
+                            <button formaction="/viewDetail/{{ $buku->id }}" class="btn btn-warning" style="float: right; margin:15px">View Detail</button>
+                            <button formaction="/addToCart/{{ $buku->id }}" class="btn btn-success" style="float: right; margin:15px">Add to Cart</button>
                         </form>
                     </div>
                 </div>

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-    public function viewDetail($id){
+    public function ViewDetail($id){
         $detailBuku = Book::where('id', $id)
                         ->first();
 

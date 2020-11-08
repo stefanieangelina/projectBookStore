@@ -149,6 +149,5 @@ Route::prefix("/vip")->group(function(){
 
 
 // USER //
-Route::prefix("/buku")->group(function(){
-    Route::any('/viewDetail/{$id}', 'PageController@viewDetail');
-});
+Route::get('/viewDetail/{$id}', 'PageController@ViewDetail');
+
