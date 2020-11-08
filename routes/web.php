@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+// INDEX //
 Auth::routes();
 
 Route::get('/', 'UserController@landingPage')->middleware('auth');
@@ -26,7 +26,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/authcustomer', function () {
     dd('berhasil');
-    return view('admin');
+    return view('home');
 })->middleware('role:Customer');
 
 Route::get('/authadmin', function () {
@@ -34,6 +34,8 @@ Route::get('/authadmin', function () {
     return view('admin');
 })->middleware('role:Admin');
 
+
+// ADMIN //
 Route::prefix("/book")->group(function(){
     // halaman list buku
     Route::any('/list', 'BookController@showBook')->name('BookList');
@@ -114,7 +116,6 @@ Route::prefix("/user")->group(function(){
     // halaman list User
     Route::any('/list', 'UserController@showUser')->name('UserList');
 
-
     // me-aktifkan kembali User
     Route::any('/active/{id}', 'UserController@active');
 
@@ -144,4 +145,10 @@ Route::prefix("/vip")->group(function(){
     // // mengedit Book
     // Route::any('/editForm/{id}', 'BookController@editForm');
     // Route::any('/edit/{id}', 'BookController@edit');
+});
+
+
+// USER //
+Route::prefix("/buku")->group(function(){
+    Route::any('/viewDetail/{$id}', 'PageController@viewDetail');
 });
