@@ -5,11 +5,11 @@
 @endsection
 
 @section('judul')
+    <br>
     WISHLIST
 @endsection
 
 @section('content')
-
 <table class="table table-striped" style="margin-left: 5%; margin-right: 5%">
     <thead>
       <tr>

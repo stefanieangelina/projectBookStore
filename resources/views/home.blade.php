@@ -9,25 +9,34 @@
     @isset($arrBuku)
         @foreach ($arrBuku as $buku)
             <div class="col-xl-3 col-sm-5 col-11" style="margin:1%">
-                <div class="card">
+                <div class="card" style="max-height: 600px" >
                     <h1 style="text-align: center;"></h1>
-                    <div class="content">
-                        <center><img src="{{ asset('/storage/images/'.$buku->image) }}" style="width:50%; height:75%"></center><br/>
-                        <b>{{ $buku->name }}</b>
-                        <p>{{ $buku->writer }}</p>
-                        <p><span class="fa fa-star"  style="font-size:15px;"> {{$buku->rating}} </span> </p>
-                        <p>Harga: Rp. {{ number_format($buku->sell_price) }}</p>
+                    <div class="content" style="font-size: 20px">
+                        <center><img src="{{ asset('/storage/images/'.$buku->image) }}" style="width:35%; height:75%"></center><br/>
+                        <div style="min-height: 60px;max-height:72px;overflow: hidden;padding: 5px"><b >{{ $buku->name }}</b></div>                        
+                        
+                        <div  style="font-size: 15px;padding :5px;color:gray"><p>{{ $buku->writer }}</p></div>
+                        <div id="rating">
+                            @for ($i = 0; $i < $buku->rating; $i++)
+                                <span class="fa fa-star checked"  style="font-size:14px;"></span>
+                            @endfor
+                            @for ($i = 0; $i < 5-$buku->rating; $i++)
+                                <span class="fa fa-star"  style="font-size:14px;"></span>
+                            @endfor
+                        </div>
+                        <br>
+                        <div style="padding: 5px"><p>Harga: Rp. {{ number_format($buku->sell_price) }}</p></div>
                         <hr>
-                        <form method="post">
+                        <form method="post" class="col-sm">
                             @csrf
-                            <button formaction="/book/viewDetail/{{ $buku->id }}" class="btn btn-warning" style="float: right; margin:5px">View Detail</button>
-                            <button formaction="/book/addToCart/{{ $buku->id }}" class="btn btn-success" style="float: right; margin:5px">Add to Cart</button>
-                            <button formaction="/book/addToWishlist/{{ $buku->id }}" class="btn btn-primary" style="float: right; margin:5px">Add to Wishlist</button>
+                            <button formaction="/book/viewDetail/{{ $buku->id }}" class="btn btn-warning sm-4" style="float: right; margin:5px">View Detail</button>
+                            <button formaction="/book/addToCart/{{ $buku->id }}" class="btn btn-success sm-4" style="float: right; margin:5px">Add to Cart</button>
+                            <button formaction="/book/addToWishlist/{{ $buku->id }}" class="btn btn-primary sm-4" style="float: right; margin:5px">Add to Wishlist</button>
                         </form>
                         <br/> <br/> <br/>
                     </div>
                 </div>
-            </div>
+            </div>            
         @endforeach
     @endisset
 </div>

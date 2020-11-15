@@ -14,66 +14,66 @@
     <title>MyBook.com</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-        <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                MyBook.com
-                {{-- <img alt="Logo"  id="logo" src="{{url('/images/logoFAI.png')}}"> --}}
-            </a>
-            <form method="post">
-                @csrf
-                <button type="submit" formaction="/showWishlist" class="btn btn-link" style="font-size:21px;  color:black">Wishlist</button>
-            </form>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+    <nav  id="mainbar" class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm" style="background-color: white !important">
+        <a class="navbar-brand" href="{{ url('/') }}">
+            <img alt="Logo" id="logo"width="30" height="30" class="d-inline-block align-top" loading="lazy" src="{{url('/images/logoFAI.png')}}">           
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto" >
+            <li class="nav-item">
+                <form method="post" >
+                    @csrf
+                    <button type="submit" id="wishBtn" formaction="/showWishlist" class="btn btn-link" style="font-size:20px"><strong>Wishlist</strong></button>
+                </form>
+            </li>
+            <li class="nav-item">
+                <form method="post">
+                    @csrf
+                    <button type="submit"formaction="/showCart" class="btn btn-link"><i class='fab fa-opencart'  style="font-size:25px;color:black"></i></button>
+                </form>
+            </li>
+            <li class="nav-item dropdown" >
+                <!-- Authentication Links -->
+                @guest
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                </li>
+                @if (Route::has('register'))
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    </li>
+                @endif
+                @else
+                    <li class="nav-item dropdown" style="font-size:20px;color:black">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <strong>{{ Auth::user()->name }}</strong>
+                        </a>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Left Side Of Navbar -->
-                <ul class="navbar-nav mr-auto">
-
-                </ul>
-
-                <!-- Right Side Of Navbar -->
-                <ul class="navbar-nav ml-auto">
-                    <form method="post">
-                        @csrf
-                        <button type="submit" formaction="/showCart" class="btn btn-link"><i class='fab fa-opencart' style="font-size:25px;"></i></button>
-                    </form>
-
-                    <!-- Authentication Links -->
-                    @guest
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        </li>
-                        @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            </li>
-                        @endif
-                    @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }}
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
                             </a>
 
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
-                    @endguest
-                </ul>
-            </div>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
+                @endguest
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0" method="POST">
+            <input class="form-control mr-sm-2" type="search"  placeholder="Cari Judul Buku" aria-label="Search"name="keyword" style="font-size:18px;">
+            <input type="submit" formaction="/search"  value="Search" class="btn btn-danger my-2 my-sm-0 font-weight-bold" style="height: 38px">
+          </form>
         </div>
-    </nav>
+      </nav>
 
     <center><h1>@yield('judul')</h1></center>
     <br/>

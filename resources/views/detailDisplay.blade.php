@@ -18,29 +18,61 @@
                         ->where('id', $detailBuku->genre_id)
                         ->first();
         @endphp
+        <div class="row" style="width:80%; block;margin: auto;">
+            <div class="card mb-3 border-0" style="max-width: 100%">
+                <div class="row no-gutters">
+                  <div class="col-md-5">
+                    <img id="coverBuku"src="{{ asset('/storage/images/'.$detailBuku->image) }}" class="rounded">    
+                  </div>
+                  <div class="col-md-7">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $detailBuku->name }}</h5>
+                        <p class="card-text">{{ $detailBuku->writer }}</p>
+                        <p class="card-text">{{ $genre->name }}</p>
+                        <div>
+                            @for ($i = 0; $i < $rating; $i++)
+                                <span class="fa fa-star checked"  style="font-size:14px;"></span>
+                            @endfor
+                            @for ($i = 0; $i < 5-$rating; $i++)
+                                <span class="fa fa-star"  style="font-size:14px;"></span>
+                            @endfor
+                        </div>
+                        <br>
+                        <div>
+                            <h4 style="float: left ; margin-right : 2px">Harga: Rp. {{ number_format($detailBuku->sell_price) }}</h4>
+                        </div>
+                        <br>
+                        <div>
+                            <form method="post" style="margin: 25px 0px 25px 0px">
+                                @csrf
+                                <button formaction="/book/addToCart/{{ $detailBuku->id }}" class="btn btn-success" style="float: left;margin-right:5px">Add to Cart</button>
+                                <button formaction="/book/addToWishlist/{{ $detailBuku->id }}" class="btn btn-primary" style="float: left;margin-right:5px">Add to Wishlist</button>
+                            </form>
+                        </div>
+                        <br>
+                        <br>
+                        <hr>
+                        <div>
+                            <b>Blurb</b>
+                        </div>
+                        <!-- blurb-->
+                        <div>
+                            <p>
+                                An entertaining illumination of the stupid beliefs that make us feel wise.
 
-            <div id="boxContent" style="min-height: 980px" >
-                <div id="card" class="rounded" >
-                    <center><img id="coverBuku"src="{{ asset('/storage/images/'.$detailBuku->image) }}" class="rounded"></center>
-                    <br/>
-                    <h3 style="margin-left : 2px">{{ $detailBuku->name }}</h3>
-                    <h5 style="margin-left : 2px">{{ $detailBuku->writer }}</h5>
-                    <h6 style="margin-left : 2px">{{ $genre->name }}</h6>
-                    <div id="rating">
-                        @for ($i = 0; $i < $rating; $i++)
-                            <span class="fa fa-star checked"  style="font-size:10px;"></span>
-                        @endfor
+Whether you’re deciding which smart phone to purchase or which politician to believe, you think you are a rational being whose every decision is based on cool, detached logic, but here’s the truth: You are not so smart. You’re just as deluded as the rest of us--but that’s okay, because being deluded is part of being human.
+
+Growing out of David McRaney’s popular blog, You Are Not So Smart reveals that every decision we make, every thought we contemplate, and every emotion we feel comes with a story we tell ourselves to explain them, but often these stories aren’t true. Each short chapter--covering topics such as Learned Helplessness, Selling Out, and the Illusion of Transparency--is like a psychology course with all the boring parts taken out.
+
+Bringing together popular science and psychology with humor and wit, You Are Not So Smart is a celebration of our irrational, thoroughly human behavior. 
+                            </p>
+                        </div>
                     </div>
-                    <h6 style="float: left ; margin-right : 2px">Harga: Rp. {{ number_format($detailBuku->sell_price) }}</h6>
-
-                    <br/> <br/>
-                    <form method="post">
-                        @csrf
-                        <button formaction="/book/addToCart/{{ $detailBuku->id }}" class="btn btn-success" style="float: center; margin:5px">Add to Cart</button>
-                        <button formaction="/book/addToWishlist/{{ $detailBuku->id }}" class="btn btn-primary" style="float: center; margin:5px">Add to Wishlist</button>
-                    </form>
+                  </div>
                 </div>
-            </div>
+              </div>
+            
+        </div>
         @endsection
     </body>
     </html>
