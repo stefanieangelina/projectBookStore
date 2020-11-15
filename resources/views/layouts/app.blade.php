@@ -20,6 +20,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
@@ -29,12 +30,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+<body style="background-color: rgb(247, 246, 245)">
+    <div id="app" style="font-size: large">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" id="mainbar">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    MyBook.com
+                    <img alt="Logo" id="logo" class="img-fluid" src="{{url('/images/logoFAI.png')}}">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -51,11 +52,11 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <strong><a class="nav-link" id="navMainBtn" href="{{ route('login') }}">{{ __('Login') }}</a></strong>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <strong><a class="nav-link" id="navMainBtn" href="{{ route('register') }}">{{ __('Register') }}</a></strong>
                                 </li>
                             @endif
                         @else
@@ -82,7 +83,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="py-5">
             @yield('content')
         </main>
     </div>

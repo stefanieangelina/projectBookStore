@@ -14,28 +14,24 @@
     <title>MyBook.com</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm sticky-top">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
-                MyBook.com
-                {{-- <img alt="Logo"  id="logo" src="{{url('/images/logoFAI.png')}}"> --}}
+                <img alt="Logo" id="logo" class="img-fluid" src="{{url('/images/logoFAI.png')}}">
             </a>
-            <form method="post">
+            <form method="post" class="sm-6">
                 @csrf
-                <button type="submit" formaction="/showWishlist" class="btn btn-link" style="font-size:21px; color:black">Wishlist</button>
+                <button type="submit" id="wishBtn" formaction="/showWishlist" class="btn btn-link " style="font-size:20px"><strong>Wishlist</strong></button>
             </form>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                <span class="navbar-toggler-icon"></span>
-            </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse sm-6" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
 
                 </ul>
 
                 <!-- Right Side Of Navbar -->
-                <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav ml-auto col-md">
                     <form method="POST" id="formSearch">
                         @csrf
                         <input type="search" placeholder="Cari Judul Buku" id="searchBox" name="keyword" style="font-size:18px;">
