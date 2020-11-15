@@ -85,7 +85,7 @@
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="#">
-                    <img src="images/icon/logo.png" alt="BookStore" />
+                    <img alt="Logo" id="logo"width="80" height="80" class="d-inline-block align-top" loading="lazy" src="{{url('/images/logoFAI.png')}}">
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
