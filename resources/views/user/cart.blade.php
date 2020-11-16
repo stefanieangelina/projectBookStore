@@ -39,9 +39,9 @@
                     <td>
                         <form method="POST">
                             @csrf
-                            <button type="submit" formaction="/qtyDown/{{$cart->id}}" class="btn btn-success"> - </button>
+                            <button type="submit" formaction="/qtyDown/{{$cart->id}}" class="btn btn-success" style="transform:translateX(5px)"> - </button>
                             <input type="number" min="1" name="qty" value="{{ $cart->qty }}">
-                            <button type="submit" formaction="/qtyUp/{{$cart->id}}" class="btn btn-success"> + </button>
+                            <button type="submit" formaction="/qtyUp/{{$cart->id}}" class="btn btn-success" style="transform:translateX(-25px)"> + </button>
                         </form>
                     </td>
                     <td>

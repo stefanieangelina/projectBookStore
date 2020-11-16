@@ -57,6 +57,8 @@ class CartController extends Controller
 
         $ctr = 1;
 
+        dd($arrCart);
+
         return \view('user.cart', ['arrCart'=>$arrCart, 'ctr'=>$ctr]);
     }
 
