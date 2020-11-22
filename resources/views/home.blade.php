@@ -13,8 +13,8 @@
                     <h1 style="text-align: center;"></h1>
                     <div class="content" style="font-size: 20px">
                         <center><img src="{{ asset('/storage/images/'.$buku->image) }}" style="width:35%; height:75%"></center><br/>
-                        <div style="min-height: 60px;max-height:72px;overflow: hidden;padding: 5px"><b >{{ $buku->name }}</b></div>                        
-                        
+                        <div style="min-height: 60px;max-height:72px;overflow: hidden;padding: 5px"><b >{{ $buku->name }}</b></div>
+
                         <div  style="font-size: 15px;padding :5px;color:gray"><p>{{ $buku->writer }}</p></div>
                         <div id="rating">
                             @for ($i = 0; $i < $buku->rating; $i++)
@@ -25,7 +25,7 @@
                             @endfor
                         </div>
                         <br>
-                        <div style="padding: 5px"><p>Harga: Rp. {{ number_format($buku->sell_price) }}</p></div>
+                        <div style="padding: 5px"><p>Harga: Rp. {{ number_format($buku->sell_price - $buku->discount) }}</p></div>
                         <hr>
                         <form method="post" class="col-sm">
                             @csrf
@@ -36,7 +36,7 @@
                         <br/> <br/> <br/>
                     </div>
                 </div>
-            </div>            
+            </div>
         @endforeach
     @endisset
 </div>

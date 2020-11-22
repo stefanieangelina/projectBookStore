@@ -37,9 +37,10 @@ class WishlistController extends Controller
         // SELECT * FROM Wishlists as c
         // left join books as b on c.book_id = b.id;
         $arrWishlist = DB::table('Wishlist as w')
-                ->leftJoin('books as b', 'w.book_id', '=', 'b.id')
+                ->join('books as b', 'w.book_id', '=', 'b.id')
                 ->where('w.user_id', $userId)
                 ->where('w.deleted_at', NULL)
+                ->select('w.id', 'b.name', 'b.sell_price', 'b.discount', 'b.stock')
                 ->get();
 
         $ctr = 1;

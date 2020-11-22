@@ -48,16 +48,18 @@ class CartController extends Controller
         $userId  = Auth::user()->id;
 
         // SELECT * FROM carts as c
-        // left join books as b on c.book_id = b.id;
+        // left join books as b on c.book_id = b.id
+        // WHERE c.user_id = 3 and c.deleted_at = null;
         $arrCart = DB::table('carts as c')
-                ->leftJoin('books as b', 'c.book_id', '=', 'b.id')
+                ->join('books as b', 'c.book_id', '=', 'b.id')
                 ->where('c.user_id', $userId)
-                ->where('c.deleted_at', NULL)
+                ->where('c.deleted_at', null)
+                ->select('c.id', 'b.name', 'c.qty', 'b.sell_price', 'b.discount', 'b.stock')
                 ->get();
 
         $ctr = 1;
 
-        dd($arrCart);
+        //dd($arrCart);
 
         return \view('user.cart', ['arrCart'=>$arrCart, 'ctr'=>$ctr]);
     }

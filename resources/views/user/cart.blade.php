@@ -29,13 +29,13 @@
         @isset($arrCart)
             @foreach ($arrCart as $cart)
                 @php
-                    $total += $cart->sell_price*$cart->qty;
+                    $total += ($cart->sell_price - $cart->discount)*$cart->qty;
                 @endphp
 
                 <tr>
                     <td>{{ $ctr++ }}</td>
                     <td>{{ $cart->name }}</td>
-                    <td>Rp. {{ number_format($cart->sell_price) }}</td>
+                    <td>Rp. {{ number_format($cart->sell_price - $cart->discount) }}</td>
                     <td>
                         <form method="POST">
                             @csrf

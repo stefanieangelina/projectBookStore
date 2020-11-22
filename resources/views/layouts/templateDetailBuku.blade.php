@@ -16,12 +16,12 @@
 <body>
     <nav  id="mainbar" class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm" style="background-color: white !important">
         <a class="navbar-brand" href="{{ url('/') }}">
-            <img alt="Logo" id="logo"width="30" height="30" class="d-inline-block align-top" loading="lazy" src="{{url('/images/logoFAI.png')}}">           
+            <img alt="Logo" id="logo"width="30" height="30" class="d-inline-block align-top" loading="lazy" src="{{url('/images/logoFAI.png')}}">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-      
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto" >
             <li class="nav-item">
@@ -70,7 +70,7 @@
           </ul>
           <form class="form-inline my-2 my-lg-0" method="POST">
             <input class="form-control mr-sm-2" type="search"  placeholder="Cari Judul Buku" aria-label="Search"name="keyword" style="font-size:18px;">
-            <input type="submit" formaction="/search"  value="Search" class="btn btn-danger my-2 my-sm-0 font-weight-bold" style="height: 38px">
+            <input type="submit" formaction="/search"  value="Search" class="btn btn-info my-2 my-sm-0 font-weight-bold" style="height: 38px">
           </form>
         </div>
       </nav>
@@ -85,6 +85,11 @@
         {{-- <div class="container-fluid" style="padding: 15px"> --}}
             @yield('content')
         {{-- </div> --}}
+    </div>
+
+    <br/>
+    <div style="text-align: right">
+            @yield('footer')
     </div>
 </body>
 </html>

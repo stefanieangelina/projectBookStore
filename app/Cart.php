@@ -9,7 +9,7 @@ class Cart extends Model
 {
     use SoftDeletes;
 
-    protected $table = "Carts";
+    protected $table = "carts";
 
     protected $primaryKey = "id";
     protected $keyType = "integer";

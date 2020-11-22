@@ -25,7 +25,7 @@
                 <tr>
                     <td>{{ $ctr++ }}</td>
                     <td>{{ $Wishlist->name }}</td>
-                    <td>Rp. {{ number_format($Wishlist->sell_price) }}</td>
+                    <td>Rp. {{ number_format($Wishlist->sell_price - $Wishlist->discount) }}</td>
                     <td>
                         <form method="post">
                             @csrf
