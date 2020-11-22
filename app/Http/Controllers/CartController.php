@@ -44,6 +44,21 @@ class CartController extends Controller
         }
     }
 
+    public function checkOut()
+    {
+       $userId=Auth::user()->id;
+       $arrCart = DB::table('carts as c')
+       ->join('books as b', 'c.book_id', '=', 'b.id')
+       ->where('c.user_id', $userId)
+       ->where('c.deleted_at', null)
+       ->select('c.id', 'b.name', 'c.qty', 'b.sell_price', 'b.discount', 'b.stock')
+       ->get();
+
+$ctr = 1;
+        return view('checkout.checkout',['arrCart'=>$arrCart, 'ctr'=>$ctr]);
+
+    }
+
     public function showCart(){
         $userId  = Auth::user()->id;
 
