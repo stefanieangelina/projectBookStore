@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Book;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
@@ -44,5 +45,16 @@ class UserController extends Controller
         return redirect('admin');
         if(Auth::user()->role==='Customer')
         return redirect('home');
+    }
+
+    public function search(Request $req)
+    {
+        $input = $req->search;
+        $cek = Book::where('nama','LIKE',"%$input%")
+                        ->orWhere('penulis','LIKE',"%$input%")->get();
+        return view('detailDisplay',[
+            'data'=>$cek,
+            'id' => $req->search
+            ]);
     }
 }
