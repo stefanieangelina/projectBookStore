@@ -61,8 +61,9 @@
     <p> <h5 style="margin-right: 5%; float: right;"> Total : Rp {{ number_format($total) }}</h5> </p>
     <br/> <br/>
 
-    <form method="post" style="margin-right: 5%">
+    <form method="post" style="margin-right: 5%" action="/checkout">
         @csrf
-        <button formaction="/checkout" class="btn btn-info" style="float: right;"> Checkout </button>
+    <input type="hidden" value="{{$total}}" name="grandtotal">
+        <button class="btn btn-info" style="float: right;"> Checkout </button>
     </form>
 @endsection

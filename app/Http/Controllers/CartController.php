@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Wishlist;
 
+
 class CartController extends Controller
 {
     public function AddToCart($id){
@@ -42,21 +43,6 @@ class CartController extends Controller
             return \redirect()
                     ->back();
         }
-    }
-
-    public function checkOut()
-    {
-       $userId=Auth::user()->id;
-       $arrCart = DB::table('carts as c')
-       ->join('books as b', 'c.book_id', '=', 'b.id')
-       ->where('c.user_id', $userId)
-       ->where('c.deleted_at', null)
-       ->select('c.id', 'b.name', 'c.qty', 'b.sell_price', 'b.discount', 'b.stock')
-       ->get();
-
-$ctr = 1;
-        return view('checkout.checkout',['arrCart'=>$arrCart, 'ctr'=>$ctr]);
-
     }
 
     public function showCart(){
@@ -105,5 +91,51 @@ $ctr = 1;
 
         return redirect()
             ->back();
+    }
+
+    public function checkout(Request $request)
+    {
+        $userId  = Auth::user()->id;
+
+        // SELECT * FROM carts as c
+        // left join books as b on c.book_id = b.id
+        // WHERE c.user_id = 3 and c.deleted_at = null;
+        $arrCart = DB::table('carts as c')
+                ->join('books as b', 'c.book_id', '=', 'b.id')
+                ->where('c.user_id', $userId)
+                ->where('c.deleted_at', null)
+                ->select('c.id', 'b.name', 'c.qty', 'b.sell_price', 'b.discount', 'b.stock')
+                ->get();
+
+        $ctr = 1;
+        $data =   DB::table('users')
+                ->select('name', 'phone','email')
+                ->where('id',$userId)
+                ->first();
+        // Set your Merchant Server Key
+        \Midtrans\Config::$serverKey = 'SB-Mid-server-uHhFZ4w7JAr7rn7UXm41SGLy';
+        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        \Midtrans\Config::$isProduction = false;
+        // Set sanitization on (default)
+        \Midtrans\Config::$isSanitized = true;
+        // Set 3DS transaction for credit card to true
+        \Midtrans\Config::$is3ds = true;
+
+        $params = array(
+            'transaction_details' => array(
+                'order_id' => rand(),
+                'gross_amount' => $request->grandtotal, //JUMLAH TOTAL
+            ),
+            'customer_details' => array(
+                'first_name' => $data->name,
+                'last_name' => '',
+                'email' => $data->email,
+                'phone' => $data->phone,
+            ),
+        );
+
+
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
+        return \view('user.checkout', ["snap_token" => $snapToken,"grandtotal" => $request->grandtotal,'arrCart'=>$arrCart, 'ctr'=>$ctr]);
     }
 }

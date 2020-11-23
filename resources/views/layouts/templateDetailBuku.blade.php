@@ -81,12 +81,15 @@
     @yield('pengumuman')
 
     <div class="d-flex justify-content-center justify-content-sm-center justify-content-xl-center">
-        @yield('content')
+        {{-- <div class="row" style="width:100%; block;margin: auto;"> --}}
+        {{-- <div class="container-fluid" style="padding: 15px"> --}}
+            @yield('content')
+        {{-- </div> --}}
     </div>
 
     <br/>
     <div style="text-align: right">
-        @yield('footer')
+            @yield('footer')
     </div>
 </body>
 </html>
