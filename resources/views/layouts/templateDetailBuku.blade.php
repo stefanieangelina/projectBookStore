@@ -68,10 +68,10 @@
                 @endguest
             </li>
           </ul>
-          <form class="form-inline my-2 my-lg-0" method="POST">
+          {{-- <form class="form-inline my-2 my-lg-0" method="POST">
             <input class="form-control mr-sm-2" type="search"  placeholder="Cari Judul Buku" aria-label="Search"name="keyword" style="font-size:18px;">
             <input type="submit" formaction="/search"  value="Search" class="btn btn-outline-danger my-2 my-sm-0 font-weight-bold" style="height: 38px">
-          </form>
+          </form> --}}
         </div>
       </nav>
 

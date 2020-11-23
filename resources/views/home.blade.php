@@ -25,7 +25,12 @@
                             @endfor
                         </div>
                         <br>
-                        <div style="padding: 5px"><p>Harga: Rp. {{ number_format($buku->sell_price - $buku->discount) }}</p></div>
+                        @if ($buku->discount == 0)
+                            <div style="padding: 5px"><p>Harga: Rp. {{ number_format($buku->sell_price) }}</p></div>
+                        @else
+                            <div style="padding: 5px"><p>Harga: <strike> Rp. {{ number_format($buku->sell_price) }}</strike> Rp. {{ number_format($buku->sell_price - $buku->discount) }}</p></div>
+                        @endif
+
                         <hr>
                         <form method="post" class="col-sm">
                             @csrf

@@ -22,7 +22,7 @@
             <div class="card mb-3 border-0" style="max-width: 100%">
                 <div class="row no-gutters">
                   <div class="col-md-5">
-                    <img id="coverBuku"src="{{ asset('/storage/images/'.$detailBuku->image) }}" class="rounded">    
+                    <img id="coverBuku"src="{{ asset('/storage/images/'.$detailBuku->image) }}" class="rounded">
                   </div>
                   <div class="col-md-7">
                     <div class="card-body">
@@ -57,21 +57,21 @@
                         </div>
                         <!-- blurb-->
                         <div>
-                            <p>
-                                An entertaining illumination of the stupid beliefs that make us feel wise.
+                            <p>{{ $detailBuku->blurb }}</p>
+                                {{-- An entertaining illumination of the stupid beliefs that make us feel wise.
 
 Whether you’re deciding which smart phone to purchase or which politician to believe, you think you are a rational being whose every decision is based on cool, detached logic, but here’s the truth: You are not so smart. You’re just as deluded as the rest of us--but that’s okay, because being deluded is part of being human.
 
 Growing out of David McRaney’s popular blog, You Are Not So Smart reveals that every decision we make, every thought we contemplate, and every emotion we feel comes with a story we tell ourselves to explain them, but often these stories aren’t true. Each short chapter--covering topics such as Learned Helplessness, Selling Out, and the Illusion of Transparency--is like a psychology course with all the boring parts taken out.
 
-Bringing together popular science and psychology with humor and wit, You Are Not So Smart is a celebration of our irrational, thoroughly human behavior. 
-                            </p>
+Bringing together popular science and psychology with humor and wit, You Are Not So Smart is a celebration of our irrational, thoroughly human behavior.
+                            </p> --}}
                         </div>
                     </div>
                   </div>
                 </div>
               </div>
-            
+
         </div>
         @endsection
     </body>
