@@ -37,10 +37,10 @@
                     <td>{{ $cart->name }}</td>
                     <td>Rp. {{ number_format($cart->sell_price - $cart->discount) }}</td>
                     <td>
-                        <form method="POST">
+                        <form method="POST" style="margin-left:-8%">
                             @csrf
                             <button type="submit" formaction="/qtyDown/{{$cart->id}}" class="btn btn-success" style="transform:translateX(5px)"> - </button>
-                            <input type="number" min="1" name="qty" value="{{ $cart->qty }}">
+                            <input type="number" min="1" name="qty" value="{{ $cart->qty }}" style="width:60px ; text-align : center" >
                             <button type="submit" formaction="/qtyUp/{{$cart->id}}" class="btn btn-success" style="transform:translateX(-25px)"> + </button>
                         </form>
                     </td>
@@ -58,12 +58,24 @@
 @endsection
 
 @section('footer')
-    <p> <h5 style="margin-right: 5%; float: right;"> Total : Rp {{ number_format($total) }}</h5> </p>
-    <br/> <br/>
-
-    <form method="post" style="margin-right: 5%" action="/checkout">
+    <form action="/checkout" method="POST" >
         @csrf
-    <input type="hidden" value="{{$total}}" name="grandtotal">
-        <button class="btn btn-info" style="float: right;"> Checkout </button>
+        <div style="float: left ;margin-left:5% ; text-align :left">
+            Pilih jenis pengiriman : <br>
+        <input type="radio" name="pengiriman"  value="standard"> Standard 3-4 Hari ( Free Ongkir ) <br>
+        <input type="radio" name="pengiriman" value="express" id=""> Express 1 hari ( + Rp. 10,000 )
+        </div>
+        
+    
+    
+
+    
+        <div style="margin-right: 5%">
+            <h5> Total : Rp {{ number_format($total) }}</h5>
+            <br>
+            <input type="hidden" value="{{$total}}" name="grandtotal">
+            <button class="btn btn-info" style="float: right;"> Checkout </button>
+        </div>
+    
     </form>
 @endsection

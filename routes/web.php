@@ -156,3 +156,5 @@ Route::any("/deleteWishlist/{id}", 'WishlistController@deleteWishlist');
 Route::any('/search', 'PageController@search');
 
 Route::post('/checkout', 'CartController@checkout');
+
+Route::get('/fTrans', 'CartController@fTrans');

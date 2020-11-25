@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Cart;
+use Dotenv\Result\Success;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Wishlist;
+
 
 
 class CartController extends Controller
@@ -94,6 +98,19 @@ class CartController extends Controller
 
     public function checkout(Request $request)
     {
+        
+        $validateData =[
+            'pengiriman'=>'required'
+        ];
+        $customMassage = [
+            'required' => 'Pengiriman tidak boleh kosong..!!'
+        ];
+        $this->validate($request,$validateData,$customMassage);
+        if($request->pengiriman == "express"){
+            $total = $request->grandtotal + 10000;            
+        }else{
+            $total = $request->grandtotal ;
+        }
         $userId  = Auth::user()->id;
 
         // SELECT * FROM carts as c
@@ -123,7 +140,7 @@ class CartController extends Controller
         $params = array(
             'transaction_details' => array(
                 'order_id' => rand(),
-                'gross_amount' => $request->grandtotal, //JUMLAH TOTAL
+                'gross_amount' => $total, //JUMLAH TOTAL
             ),
             'customer_details' => array(
                 'first_name' => $data->name,
@@ -132,9 +149,14 @@ class CartController extends Controller
                 'phone' => $data->phone,
             ),
         );
-
-
+        
+        Session::put("listTrans",$arrCart); 
+        Session::put("total",$total);
+        Session::put("jenisKirim",$request->peniriman); 
         $snapToken = \Midtrans\Snap::getSnapToken($params);
-        return \view('user.checkout', ["snap_token" => $snapToken,"grandtotal" => $request->grandtotal,'arrCart'=>$arrCart, 'ctr'=>$ctr]);
+        return \view('user.checkout', ["snap_token" => $snapToken,"grandtotal" => $total,'arrCart'=>$arrCart, 'ctr'=>$ctr, 'pengiriman'=>$request->pengiriman]);
+    }
+    public function fTrans(){
+        return \view('user.Success');
     }
 }

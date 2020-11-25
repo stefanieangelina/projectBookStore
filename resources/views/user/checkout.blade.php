@@ -16,7 +16,7 @@
                     <div class="col-md-8"  >
                         <h3>Pembayaran</h3>
                         <div class="card border-0"style="background-color: white">
-                            <table class="table table-striped" style="margin-left: 5%; margin-right: 5%">
+                            <table class="table table-striped" style=" margin-right: 5%">
                                 <thead>
                                   <tr>
                                     <th>#</th>
@@ -43,6 +43,10 @@
                             </tbody>
                         </table>
                         </div>
+                        @if ($pengiriman == "express")
+                        <p>Pengiriman yang di pilih adalah pengiriman Express maka total akan ditambah Rp. 10,000.</p>
+                        @endif
+                        <a class="btn btn-info" style="float: right;" href="/fTrans">check </a>
                         <h4 style="text-align: right">Total Rp. {{number_format($grandtotal)}}</h4><br>
                         <button id="pay-button" class="btn btn-success" style="float : right">Bayar Sekarang</button>
                         <script type="text/javascript">
