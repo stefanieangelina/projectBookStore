@@ -54,7 +54,7 @@ class BookController extends Controller
         $BookArr = Book::withTrashed()->get();
         $user  = Auth::user()->name;
 
-        return \view('Book.list', ['BookArr' => $BookArr,
+        return \view('book.list', ['BookArr' => $BookArr,
                                     'userLogin' => $user]);
     }
 
