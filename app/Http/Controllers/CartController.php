@@ -217,6 +217,6 @@ class CartController extends Controller
             }
         }
     //dd(Session::get('listTrans'));
-        return \view('user.Success');
+        return view('home');
     }
 }
