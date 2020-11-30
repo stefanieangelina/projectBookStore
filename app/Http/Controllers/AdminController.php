@@ -102,19 +102,19 @@ class AdminController extends Controller
         return \view('admin.listPembayaran', ['userLogin' => $user, 'htrans' => $transArr]);
     }
 
-    public function transaksiKonfirm(){
-        /*$transUpdate= htrans::where('id', $id)
+    public function transaksiKonfirm(Request $req, $id){
+        $transUpdate= htrans::where('id', $id)
                     ->update(['status_trans' => 1]);
 
         return \redirect()
-                ->back();*/
+                ->back();
     }
 
-    public function transaksiTolak(){
-        /*$transUpdate= htrans::where('id', $id)
+    public function transaksiTolak(Request $req, $id){
+        $transUpdate= htrans::where('id', $id)
                     ->update(['status_trans' => 2]);
 
         return \redirect()
-                ->back();*/
+                ->back();
     }
 }

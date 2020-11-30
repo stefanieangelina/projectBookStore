@@ -109,6 +109,8 @@ Route::prefix("/admin")->group(function(){
     Route::any('/edit/{id}', 'AdminController@edit');
 
     Route::any('/transaksi', 'AdminController@transaksi');
+    Route::any('/transaksi/konfirm/{id}', 'AdminController@transaksiKonfirm');
+    Route::any('/transaksi/tolak/{id}', 'AdminController@transaksiTolak');
 });
 
 Route::prefix("/user")->group(function(){
