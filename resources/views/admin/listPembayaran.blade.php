@@ -31,8 +31,8 @@
             @for ($i = 0; $i < count($transArr); $i++)
                 <tr>
                     <td>{{ $transArr[$i]->id }}</td>
-                    <td>{{ $transArr[$i]->name }}</td>
-                    <td>{{ $transArr[$i]->purchase }}</td>
+                    <td>{{ $transArr[$i]->user_id }}</td>
+                    <td>{{ $transArr[$i]->total }}</td>
                     <td>
                         <form method="POST">
                             @csrf
