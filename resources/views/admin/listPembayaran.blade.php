@@ -43,6 +43,12 @@
                                 <button type="submit" formaction="/transaksi/tolak/{{$transArr[$i]->id}}" class="btn btn-danger">
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
+                            @else
+                                @if ($transArr[$i]->status_trans == 1)
+                                    {{ Finnish }}
+                                @elseif ($transArr[$i]->status_trans == 2)
+                                    {{ Rejected }}
+                                @endif
                             @endif
                         </form>
                     </td>
