@@ -17,12 +17,7 @@
 @endsection
 
 @section('content')
-{{-- <form method="post">
-    @csrf
-    <button type="submit" formaction="/book/insert" class="btn btn-info" style="float: right">Add New Book</button>
-</form> --}}
-
-{{-- <table class="table table-hover table-light">
+<table class="table table-hover table-light">
     <thead>
         <tr>
             <th>ID</th>
@@ -32,26 +27,20 @@
         </tr>
     </thead>
     <tbody>
-        @if(count($BookArr) > 0 )
-            @for ($i = 0; $i < count($BookArr); $i++)
+        @if(count($transArr) > 0 )
+            @for ($i = 0; $i < count($transArr); $i++)
                 <tr>
-                    <td>{{ $BookArr[$i]->name }}</td>
-                    <td>{{ $BookArr[$i]->buy_price }}</td>
-                    <td>{{ $BookArr[$i]->sell_price }}</td>
-                    <td>{{ $BookArr[$i]->discount }}</td>
-                    <td>{{ $BookArr[$i]->stock }}</td>
+                    <td>{{ $transArr[$i]->id }}</td>
+                    <td>{{ $transArr[$i]->name }}</td>
+                    <td>{{ $transArr[$i]->purchase }}</td>
                     <td>
                         <form method="POST">
                             @csrf
-                            <button type="submit" formaction="/book/editForm/{{$BookArr[$i]->id}}" class="btn btn-warning">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            @if($BookArr[$i]->trashed())
-                                <button type="submit" formaction="/book/active/{{$BookArr[$i]->id}}" class="btn btn-success">
+                            @if($transArr[$i]->status_trans == 0)
+                                <button type="submit" formaction="/transaksi/konfirmasi/{{$transArr[$i]->id}}" class="btn btn-success">
                                     <i class="fas fa-check"></i>
                                 </button>
-                            @else
-                                <button type="submit" formaction="/book/nonActive/{{$BookArr[$i]->id}}" class="btn btn-danger">
+                                <button type="submit" formaction="/transaksi/tolak/{{$transArr[$i]->id}}" class="btn btn-danger">
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
                             @endif
@@ -61,6 +50,6 @@
             @endfor
         @endif
     </tbody>
-</table> --}}
+</table>
 @endsection
 
