@@ -159,3 +159,5 @@ Route::any('/search', 'PageController@search');
 Route::post('/checkout', 'CartController@checkout');
 
 Route::get('/fTrans', 'CartController@fTrans');
+
+Route::post('/verify', 'mailController@sendMail');

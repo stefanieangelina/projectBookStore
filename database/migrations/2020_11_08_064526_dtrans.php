@@ -13,7 +13,19 @@ class Dtrans extends Migration
      */
     public function up()
     {
-        //
+         Schema::create('dtrans', function (Blueprint $table) {
+            $table->id();
+            $table->integer('htrans_id');
+            $table->integer('books_id');
+            $table->integer('banyak');
+            $table->integer('satuan');
+            $table->integer('jumlah');
+
+
+            // Foreign Keys
+
+
+        });
     }
 
     /**
@@ -23,6 +35,6 @@ class Dtrans extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('dtrans');
     }
 }

@@ -13,7 +13,18 @@ class HTrans extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('htrans', function (Blueprint $table) {
+            $table->id();
+            $table->string('cara_pembayaran',20);
+            $table->integer('total');
+            $table->softDeletes();
+            $table->timestamps();
+            $table->integer('status');
+
+            // Foreign Keys
+            $table->foreignId('user_id')->constrained();
+
+        });
     }
 
     /**
@@ -23,6 +34,6 @@ class HTrans extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('htrans');
     }
 }
