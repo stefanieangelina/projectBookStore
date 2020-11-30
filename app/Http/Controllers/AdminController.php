@@ -88,15 +88,29 @@ class AdminController extends Controller
         $AdminUpdate= User::where('id', $id)
                     ->delete();
 
-                //->update(['status_user' => 0]);
-
         return \redirect()
             ->back();
     }
 
     public function transaksi(){
+        $user  = Auth::user()->name;
 
-        //return view('listPembayaran', ['' => ]);
-        return \view('listPembayaran');
+        return \view('admin.listPembayaran', ['userLogin' => $user]);
+    }
+
+    public function transaksiKonfirm(){
+        /*$TransUpdate= Htrans::where('id', $id)
+                    ->update(['status_trans' => 1]);
+
+        return \redirect()
+                ->back();*/
+    }
+
+    public function transaksiTolak(){
+        /*$TransUpdate= Htrans::where('id', $id)
+                    ->update(['status_trans' => 2]);
+
+        return \redirect()
+                ->back();*/
     }
 }

@@ -108,6 +108,7 @@ Route::prefix("/admin")->group(function(){
 
     Route::any('/edit/{id}', 'AdminController@edit');
 
+    Route::any('/transaksi', 'AdminController@transaksi');
 });
 
 Route::prefix("/user")->group(function(){
