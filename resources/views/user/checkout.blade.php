@@ -46,7 +46,6 @@
                         @if ($pengiriman == "express")
                         <p>Pengiriman yang di pilih adalah pengiriman Express maka total akan ditambah Rp. 10,000.</p>
                         @endif
-                        <a class="btn btn-info" style="float: right;" href="/fTrans">check </a>
                         <h4 style="text-align: right">Total Rp. {{number_format($grandtotal)}}</h4><br>
                         <button id="pay-button" class="btn btn-success" style="float : right">Bayar Sekarang</button>
                         <script type="text/javascript">
