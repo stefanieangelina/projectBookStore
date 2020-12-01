@@ -17,44 +17,51 @@
 @endsection
 
 @section('content')
+{{-- <form method="post">
+    @csrf
+    <button type="submit" formaction="/book/insert" class="btn btn-info" style="float: right">Add New Book</button>
+</form> --}}
+
 <table class="table table-hover table-light">
     <thead>
         <tr>
             <th>ID</th>
             <th>Name</th>
             <th>Purchase</th>
+            <th>Photo</th>
             <th>Action</th>
         </tr>
     </thead>
     <tbody>
-        @if(count($transArr) > 0 )
-            @for ($i = 0; $i < count($transArr); $i++)
-                <tr>
-                    <td>{{ $transArr[$i]->id }}</td>
-                    <td>{{ $transArr[$i]->user_id }}</td>
-                    <td>{{ $transArr[$i]->total }}</td>
-                    <td>
-                        <form method="POST">
-                            @csrf
-                            @if($transArr[$i]->status_trans == 0)
-                                <button type="submit" formaction="/transaksi/konfirmasi/{{$transArr[$i]->id}}" class="btn btn-success">
-                                    <i class="fas fa-check"></i>
-                                </button>
-                                <button type="submit" formaction="/transaksi/tolak/{{$transArr[$i]->id}}" class="btn btn-danger">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            @else
-                                @if ($transArr[$i]->status_trans == 1)
-                                    {{ Finnish }}
-                                @elseif ($transArr[$i]->status_trans == 2)
-                                    {{ Rejected }}
-                                @endif
-                            @endif
-                        </form>
-                    </td>
-                </tr>
-            @endfor
-        @endif
+        <?php 
+             $transaksi = DB::table('htrans')->select('*')->where('status', 1)->get();            
+        ?>
+        @foreach ($transaksi as $item)
+        
+        <tr>
+            <?php 
+                                            
+                $user = DB::table('users')->where('id', $item->user_id)->first();
+        
+            ?>
+            <td>{{ $item->id }}</td>
+            <td>{{ $user->name }}</td>
+            <td>Rp {{ $item->total }}</td>
+            <td>
+                <form method="POST">
+                    @csrf
+                    <button type="submit" formaction="" class="btn btn-warning">
+                        <i class="fas fa-check"></i>
+                    </button>
+                    <button type="submit" formaction="" class="btn btn-danger">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+        @endforeach
+           
+        
     </tbody>
 </table>
 @endsection
