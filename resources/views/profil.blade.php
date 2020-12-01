@@ -11,10 +11,10 @@
     Email : {{ Auth::user()->email }}
     <br/><br/>
 
-    Alamat : {{ (Auth::user()->address == null)? 'Belum ada data' :  Auth::user()->address }}
+    Address : {{ (Auth::user()->address == null)? 'Belum ada data' :  Auth::user()->address }}
     <br/><br/>
 
-    Nomer Telepon : {{ (Auth::user()->phone == null)? 'Belum ada data' :  Auth::user()->phone }}
+    Phone : {{ (Auth::user()->phone == null)? 'Belum ada data' :  Auth::user()->phone }}
     <br/><br/>
 
     Points : {{ Auth::user()->points }}
@@ -22,6 +22,6 @@
 
     <form method="POST">
         @csrf
-        <button class="btn btn-info" name="btnEdit" formaction="/editProfile">Edit</button>
+        <button class="btn btn-primary" name="btnEdit" formaction="/edit">Edit Profile</button>
     </form>
 @endsection
