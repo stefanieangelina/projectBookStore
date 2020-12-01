@@ -49,7 +49,7 @@
                 @endif
                 @else
                     <li class="nav-item dropdown" style="font-size:20px;color:black">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <a href="/profile" id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             <strong>{{ Auth::user()->name }}</strong>
                         </a>
 

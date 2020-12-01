@@ -31,4 +31,8 @@ class HomeController extends Controller
         // dd($arrBuku);
         return view('home', ['arrBuku'=> $arrBuku]);
     }
+
+    public function profil(){
+        return \view('profil');
+    }
 }

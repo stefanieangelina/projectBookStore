@@ -163,3 +163,5 @@ Route::post('/checkout', 'CartController@checkout');
 Route::get('/fTrans', 'CartController@fTrans');
 
 Route::post('/verify', 'mailController@sendMail');
+
+Route::any("/profile", 'HomeController@profil');
