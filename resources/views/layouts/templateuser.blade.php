@@ -33,7 +33,7 @@
             <li class="nav-item">
                 <form method="post">
                     @csrf
-                    <button type="submit"formaction="/showCart" class="btn btn-link"><i class='fab fa-opencart'  style="font-size:25px;color:black"></i></button>
+                    <button type="submit"formaction="/showCart" class="btn btn-link"><i class='fab fa-opencart'  style="font-size:25px;color:black"><span style="font-size:20px"><b>Cart</b></span></i></button>
                 </form>
             </li>
             <li class="nav-item dropdown" >
@@ -69,6 +69,7 @@
             </li>
           </ul>
           <form class="form-inline my-2 my-lg-0" method="POST">
+            @csrf
             <input class="form-control mr-sm-2" type="search"  placeholder="Cari Judul Buku" aria-label="Search"name="keyword" style="font-size:18px;">
             <input type="submit" formaction="/search"  value="Search" class="btn btn-outline-danger my-2 my-sm-0 font-weight-bold" style="height: 38px">
           </form>

@@ -103,6 +103,11 @@ class CartController extends Controller
 
     public function checkout(Request $request)
     {
+        for ($x = 1; $x <= $request->temp ; $x++) {
+
+            Cart::where('id', $request->id.$x)
+            ->update(array('qty' => $request->qty.$x));
+        }
 
         $validateData =[
             'pengiriman'=>'required'
@@ -111,11 +116,13 @@ class CartController extends Controller
             'required' => 'Pengiriman tidak boleh kosong..!!'
         ];
         $this->validate($request,$validateData,$customMassage);
-        if($request->pengiriman == "express"){
-            $total = $request->grandtotal + 10000;
-        }else{
-            $total = $request->grandtotal ;
-        }
+        // if($request->pengiriman == "express"){
+        //     $total = $request->grandtotal + 10000;
+        // }else{
+        //     $total = $request->grandtotal ;
+        // }
+        // $userId  = Auth::user()->id;
+
         $userId  = Auth::user()->id;
 
         // SELECT * FROM carts as c
@@ -145,7 +152,7 @@ class CartController extends Controller
         $params = array(
             'transaction_details' => array(
                 'order_id' => rand(),
-                'gross_amount' => $total, //JUMLAH TOTAL
+                'gross_amount' => $request->grandtotal, //JUMLAH TOTAL
             ),
             'customer_details' => array(
                 'first_name' => $data->name,
@@ -156,11 +163,12 @@ class CartController extends Controller
         );
 
         Session::put("listTrans",$arrCart);
-        Session::put("total",$total);
+        Session::put("total",$request->grandtotal);
         Session::put("jenisKirim",$request->peniriman);
         //dd(Session::get('listTrans'));
         $snapToken = \Midtrans\Snap::getSnapToken($params);
-        return \view('user.checkout', ["snap_token" => $snapToken,"grandtotal" => $total,'arrCart'=>$arrCart, 'ctr'=>$ctr, 'pengiriman'=>$request->pengiriman]);
+
+        return \view('user.checkout', ["snap_token" => $snapToken,"grandtotal" => $request->grandtotal,'arrCart'=>$arrCart, 'ctr'=>$ctr, 'pengiriman'=>$request->pengiriman]);
     }
     public function fTrans(){
         foreach (Session::get('listTrans') as $books) {

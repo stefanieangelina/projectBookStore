@@ -21,15 +21,15 @@ class PageController extends Controller
 
         $arrBuku = Book::get();
 
-        /*if($keyword == ""){
+        if($keyword == ""){
             $arrBuku = Book::get();
         } else {
             // SELECT * FROM books
             // where lower(name) like '%t%';
 
-            //$arrBuku = Book::where('LOWER(name)', 'like', '%'. $keyword. '%')
-                   // ->get();
-        }*/
+            $arrBuku = Book::where('name', 'like', '%'. $keyword. '%')
+                    ->get();
+        }
 
         return view('home', ['arrBuku'=> $arrBuku]);
     }
