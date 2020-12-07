@@ -17,6 +17,7 @@ class PageController extends Controller
     }
 
     public function search(Request $req){
+
         $keyword = '%'.strtolower($req->keyword).'%';
 
         $arrBuku = Book::get();

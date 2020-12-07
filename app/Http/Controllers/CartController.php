@@ -100,7 +100,15 @@ class CartController extends Controller
         return redirect()
             ->back();
     }
+    public function konfirmasiPayment(Request $request){
 
+        $ext = $request->file("bukti")->getClientOriginalExtension();
+        $nama = $request->htransID.".".$ext;
+        $request->file("bukti")->storeAs("BuktiBayar", $nama, "public");
+        htrans::where('id', $request->htransID)
+        ->update(array('file_bukti' => $nama));
+        return redirect('/home');
+    }
     public function checkout(Request $request)
     {
         for ($x = 1; $x <= $request->temp ; $x++) {
@@ -108,7 +116,6 @@ class CartController extends Controller
             Cart::where('id', $request->id.$x)
             ->update(array('qty' => $request->qty.$x));
         }
-
         $validateData =[
             'pengiriman'=>'required'
         ];
@@ -116,12 +123,6 @@ class CartController extends Controller
             'required' => 'Pengiriman tidak boleh kosong..!!'
         ];
         $this->validate($request,$validateData,$customMassage);
-        // if($request->pengiriman == "express"){
-        //     $total = $request->grandtotal + 10000;
-        // }else{
-        //     $total = $request->grandtotal ;
-        // }
-        // $userId  = Auth::user()->id;
 
         $userId  = Auth::user()->id;
 
@@ -167,8 +168,65 @@ class CartController extends Controller
         Session::put("jenisKirim",$request->peniriman);
         //dd(Session::get('listTrans'));
         $snapToken = \Midtrans\Snap::getSnapToken($params);
+        return \view('user.checkout', ["snap_token" => $snapToken,"grandtotal" => $request->grandtotal,'arrCart'=>$arrCart, 'ctr'=>$ctr, 'pengiriman'=>$request->pengiriman,'pembayaran'=>$request->payment]);
+    }
+    public function manualPayment(Request $request){
+        foreach (Session::get('listTrans') as $books) {
+            Cart::where('id', $books->id)
+                ->delete();
+        }
+        $newtrans = new htrans();
+        $newtrans->cara_pembayaran = "tidak poin";
+        $newtrans->total = Session::get('total');
+        $newtrans->user_id=Auth::user()->id;
+        $newtrans->status = 0;
+        $newtrans->file_bukti = "";
+        $newtrans->save();
+        $htransID=   DB::table('htrans')
+        ->select('id')
+        ->where('user_id',Auth::user()->id)
+        ->where('total',Session::get('total'))
+        ->first();
+        $userPoint =DB::table('users')
+        ->select('points')
+        ->where('id',Auth::user()->id)
+        ->first();
+        $calcpoint = intval(floor(Session::get('total') /100000));
+        foreach (Session::get('listTrans') as $books) {
+            $dtrans = new dtrans();
+            $dtrans->htrans_id = $htransID->id;
+            $dtrans->books_id =$books->book_id;
+            $dtrans->banyak = $books->qty;
+            $temp = $books->sell_price - $books->discount;
+            $dtrans->satuan = $temp;
+            $dtrans->jumlah = $temp * $books->qty;
+            $dtrans->save();
+            $stok = $books->stock - $books->qty;
+            Books::where('id', $books->book_id)
+            ->update(['stock' => $stok]);
 
-        return \view('user.checkout', ["snap_token" => $snapToken,"grandtotal" => $request->grandtotal,'arrCart'=>$arrCart, 'ctr'=>$ctr, 'pengiriman'=>$request->pengiriman]);
+        }
+        if  (Session::get('total')>=500000){
+            $member =DB::table('users')
+            ->select('isMember')
+            ->where('id',Auth::user()->id)
+            ->first();
+            if($member->isMember =="1"){
+                Users::where('id', Auth::user()->id)
+                ->update(['points' => $userPoint->points + $calcpoint]);
+            }else if($member->isMember =="0"){
+                Users::where('id', Auth::user()->id)
+                ->update(['isMember' => 1]);
+                $newVip = new Vip();
+                $newVip->status =1;
+                $newVip->user_id = Auth::user()->id;
+                $newVip->save();
+                Users::where('id', Auth::user()->id)
+                ->update(['points' => $userPoint->points + $calcpoint]);
+            }
+        }
+    //dd(Session::get('listTrans'));
+        return view('user.success',['id_htrans' =>$htransID->id]);
     }
     public function fTrans(){
         foreach (Session::get('listTrans') as $books) {
@@ -225,6 +283,6 @@ class CartController extends Controller
             }
         }
     //dd(Session::get('listTrans'));
-        return \view('user.Success');
+        return view('home');
     }
 }

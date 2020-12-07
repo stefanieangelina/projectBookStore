@@ -72,54 +72,18 @@
                                 }
                                 document.getElementById("total").innerHTML = total;
                                 document.getElementById("grandTotal").value =total;
+
                             }
                         </script>
-                        @php
-                            $ctr2++;
-                        @endphp
+                            @php
+                                $ctr2++;
+                            @endphp
                     </td>
                     <td>
                         <form method="post">
                             @csrf
                             <button formaction="/deleteCart/{{$cart->id}}" class="btn btn-danger">Delete</a></button>
-
-                        {{-- <form method="post">
-                        @csrf
-                            <div style="float: left ;margin-left:5% ; text-align :left">
-                                Pilih jenis pengiriman : <br>
-                                <input type="hidden" name="" id="check" value="0">
-                                <input type="radio" name="pengiriman" onclick="biasa()" value="standard"> Standard 3-4 Hari ( Free Ongkir ) <br>
-                                <input type="radio" name="pengiriman" onclick="express()"value="express" id=""> Express 1 hari ( + Rp. 10,000 )
-                            </div>
-                            <script>
-                                function biasa(){
-                                    var check =parseInt(document.getElementById("check").value);
-                                    var total =  parseInt(document.getElementById("total").innerHTML);
-                                    if  (check == 1){
-                                        total = total -10000
-                                    }
-                                    document.getElementById("check").value =0;
-                                    document.getElementById("total").innerHTML = total;
-                                    document.getElementById("grandTotal").value =total;
-                                }
-                                function express(){
-                                    var check =parseInt(document.getElementById("check").value);
-                                    var total =  parseInt(document.getElementById("total").innerHTML);
-                                    if  (check == 0){
-                                        total = total +10000
-                                    }
-                                    document.getElementById("check").value =1;
-                                    document.getElementById("total").innerHTML = total;
-                                    document.getElementById("grandTotal").value =total;
-                                }
-                            </script>
-                            <div style="margin-right: 5%">
-                                <h5> Total : Rp <span id="total">{{ $total }}</span></h5><br>
-                                <input type="hidden" name="temp"value="{{$ctr}}">
-                                <input type="hidden" id="grandTotal"value="{{$total}}" name="grandtotal">
-                                <button class="btn btn-info" style="float: right;"> Checkout </button>
-                            </div>
-                        </form> --}}
+                        </form>
                     </td>
                 </tr>
             @endforeach
@@ -129,30 +93,13 @@
 @endsection
 
 @section('footer')
-    {{-- <form action="/checkout" method="POST" >
+    <form action="/checkout" method="POST" >
         @csrf
         <div style="float: left ;margin-left:5% ; text-align :left">
             Pilih jenis pengiriman : <br>
-        <input type="radio" name="pengiriman"  value="standard"> Standard 3-4 Hari ( Free Ongkir ) <br>
-        <input type="radio" name="pengiriman" value="express" id=""> Express 1 hari ( + Rp. 10,000 )
-        </div>
-        <br/><br/>
-        <div style="margin-right: 5%">
-            <h5> Total : Rp {{ number_format($total) }}</h5>
-            <br>
-            <input type="hidden" value="{{$total}}" name="grandtotal">
-            <button class="btn btn-info" style="float: right;"> Checkout </button>
-        </div>
-
-    </form> --}}
-
-    <form method="post">
-    @csrf
-        <div style="float: left ;margin-left:5% ; text-align :left">
-            Pilih jenis pengiriman : <br>
             <input type="hidden" name="" id="check" value="0">
-            <input type="radio" name="pengiriman" onclick="biasa()" value="standard"> Standard 3-4 Hari ( Free Ongkir ) <br>
-            <input type="radio" name="pengiriman" onclick="express()"value="express" id=""> Express 1 hari ( + Rp. 10,000 )
+        <input type="radio" name="pengiriman" onclick="biasa()" value="standard"> Standard 3-4 Hari ( Free Ongkir ) <br>
+        <input type="radio" name="pengiriman" onclick="express()"value="express" id=""> Express 1 hari ( + Rp. 10,000 )
         </div>
         <script>
             function biasa(){
@@ -177,13 +124,21 @@
             }
         </script>
 
-        <br/><br/><br/><br/><br/>
+
+
 
         <div style="margin-right: 5%">
-            <h5> Total : Rp <span id="total">{{ $total }}</span></h5><br>
+            Pilih metode pembayaran :
+            <select id="" name="payment">
+                <option value="manual">Transfer ATM</option>
+                <option value="midtrans">Midtrans</option>
+            </select><br><br>
+            <h5> Total : Rp <span id="total">{{ $total }}</span></h5>
+            <br>
             <input type="hidden" name="temp"value="{{$ctr}}">
             <input type="hidden" id="grandTotal"value="{{$total}}" name="grandtotal">
             <button class="btn btn-info" style="float: right;"> Checkout </button>
         </div>
+
     </form>
 @endsection

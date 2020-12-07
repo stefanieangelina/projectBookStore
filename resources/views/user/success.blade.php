@@ -5,12 +5,20 @@
 @endsection
 
 @section('content')
-    Transaksi dibuat, Harap melanjutkan ke Pembayaran sebesar <br>
-    Rp . {{Session::get('total')}} , dan jangan lupa untuk menulis kode transaksi pada komen transfer
+   <div>
+    <div>
+        <h3>Transaksi Berhasil</h3>
+        Segera lakukan konfirmasi pembayaran dan upload bukti pembayaran di sini
+    </div><br>
+    <div>
+        <form action="/konfirmasi" enctype="multipart/form-data" method="POST">
+            @csrf
+        <input type="hidden" name="htransID" id="" value="{{$id_htrans}}">
+            <input type="file" name="bukti" id=""><br><br>
+            <input type="submit" class="btn btn-success" value="Konfirmasi">
+        </form>
+    </div>
+   </div>
 
-    <form action="/uploadBukti" method="POST">
-        @csrf
-        Upload bukti Transaksi : <input type="file" name="bukti" id="" enctype="multipart/form-data">
-    </form>
-    
+
 @endsection

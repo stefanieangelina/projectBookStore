@@ -109,6 +109,9 @@ Route::prefix("/admin")->group(function(){
     Route::any('/edit/{id}', 'AdminController@edit');
 
     Route::any('/transaksi', 'AdminController@transaksi');
+    Route::any('/transaksi/konfirm/{id}', 'AdminController@transaksiKonfirm');
+    Route::any('/transaksi/tolak/{id}', 'AdminController@transaksiTolak');
+    Route::post('/hapusTransaksi', 'AdminController@hapusTransaksi');
 });
 
 Route::prefix("/user")->group(function(){
@@ -160,10 +163,6 @@ Route::post('/checkout', 'CartController@checkout');
 
 Route::get('/fTrans', 'CartController@fTrans');
 
-
 Route::post('/verify', 'mailController@sendMail');
-
-Route::any("/profile", 'HomeController@profil')->name('homeProfile');
-Route::any("/edit", 'HomeController@edit');
-Route::any("/isiProfile", 'HomeController@editProfil');
-
+Route::post('/manualPayment', 'CartController@manualPayment');
+Route::post('/konfirmasi', 'CartController@konfirmasiPayment');

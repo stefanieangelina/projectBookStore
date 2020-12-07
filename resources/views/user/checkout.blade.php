@@ -46,19 +46,24 @@
                         @if ($pengiriman == "express")
                         <p>Pengiriman yang di pilih adalah pengiriman Express maka total akan ditambah Rp. 10,000.</p>
                         @endif
-                        
                         <h4 style="text-align: right">Total Rp. {{number_format($grandtotal)}}</h4><br>
-                        <a class="btn btn-info" style="float: right;" href="/fTrans">Bayar Sekarang</a>
-                        {{-- 
-                            <button id="pay-button" class="btn btn-success" style="float : right">Bayar Sekarang</button>
-                            <script type="text/javascript">
-                                var payButton = document.getElementById('pay-button');
-                                // For example trigger on button clicked, or any time you need
-                                payButton.addEventListener('click', function () {
-                                snap.pay('{{//$snap_token}}'); // Replace it with your transaction token
-                                });
-                            </script>                              
-                        --}}
+                        @if ($pembayaran == "manual")
+                        <form action="/manualPayment" method="POST">
+                            @csrf
+                            <input type="submit" name="" class="btn btn-success"id="pay-button"style="float : right"  value="Bayar Sekarang">
+                        </form>
+                        @elseif  ($pembayaran == "midtrans")
+                        <button id="pay-button" class="btn btn-success" style="float : right">Bayar Sekarang</button>
+                        <script type="text/javascript">
+                            var payButton = document.getElementById('pay-button');
+                            // For example trigger on button clicked, or any time you need
+                            payButton.addEventListener('click', function () {
+                            snap.pay('{{$snap_token}}'); // Replace it with your transaction token
+                            });
+                        </script>
+                        @endif
+
+
                     </div>
                 </div>
             </div>
