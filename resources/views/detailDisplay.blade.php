@@ -18,13 +18,16 @@
                         ->where('id', $detailBuku->genre_id)
                         ->first();
         @endphp
-        <div class="row" style="width:80%; block;margin: auto;">
+        <div class="row" style="width:90%; block;margin: auto; transform: translateX(10%)">
             <div class="card mb-3 border-0" style="max-width: 100%">
                 <div class="row no-gutters">
                   <div class="col-md-5">
                     <img id="coverBuku"src="{{ asset('/storage/images/'.$detailBuku->image) }}" class="rounded">
                   </div>
-                  <div class="col-md-7">
+                  <div class="col-md-1">
+                    </div>
+
+                  <div class="col-md-5">
                     <div class="card-body">
                         <h5 class="card-title">{{ $detailBuku->name }}</h5>
                         <p class="card-text">{{ $detailBuku->writer }}</p>
@@ -52,6 +55,7 @@
                         <br>
                         <br>
                         <hr>
+                        <br/>
                         <div>
                             <b>Blurb</b>
                         </div>
