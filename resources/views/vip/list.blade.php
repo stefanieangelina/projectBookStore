@@ -18,7 +18,8 @@
             <tr>
                 <th>ID Member</th>
                 <th>Email</th>
-                <th>status</th>
+                {{-- <th>Status</th> --}}
+                <th>Points</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -27,12 +28,29 @@
                 @for ($i = 0; $i < count($vipArr); $i++)
                     <tr>
                         <td>{{ $vipArr[$i]->id }}</td>
-                        <td>email user</td>
                         <td>
+                            @if(count($userArr) > 0 )
+                                @for ($j = 0; $j < count($userArr); $j++)
+                                    @if ($userArr[$j]->id == $vipArr[$i]->user_id)
+                                        {{$userArr[$j]->email}}
+                                    @endif
+                                @endfor
+                            @endif
+                        </td>
+                        {{-- <td>
                             @if($vipArr[$i]->status == 0)
                                 {{ "Waiting for Approve"}}
                             @else
                                 {{ "VIP Member" }}
+                            @endif
+                        </td> --}}
+                        <td>
+                            @if(count($userArr) > 0 )
+                                @for ($j = 0; $j < count($userArr); $j++)
+                                    @if ($userArr[$j]->id == $vipArr[$i]->user_id)
+                                        {{$userArr[$j]->points}}
+                                    @endif
+                                @endfor
                             @endif
                         </td>
                         <td>

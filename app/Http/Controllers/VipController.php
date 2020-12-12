@@ -20,8 +20,35 @@ class VipController extends Controller
     public function showVip(){
         $vipArr = Vip::withTrashed()->get();
         $user  = Auth::user()->name;
+        $userArr = User::get();
 
-        return \view('vip.list', ['vipArr' => $vipArr,
+        return \view('vip.list', [
+                                    'userArr' => $userArr,
+                                    'vipArr' => $vipArr,
                                     'userLogin' => $user]);
+    }
+
+    public function active(Request $req, $id){
+        $userUpdate = VIP::where('id',$id)->restore();
+
+        if($userUpdate){
+            return redirect()
+                ->back();
+        } else {
+            return redirect()
+                ->back();
+        }
+    }
+
+    public function nonActive(Request $req, $id){
+        $userUpdate = VIP::find($id)->delete();
+
+        if($userUpdate){
+            return redirect()
+                ->back();
+        } else {
+            return redirect()
+                ->back();
+        }
     }
 }
