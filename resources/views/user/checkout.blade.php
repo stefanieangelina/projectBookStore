@@ -28,8 +28,6 @@
                             <tbody>
                                 @isset($arrCart)
                                     @foreach ($arrCart as $cart)
-
-
                                         <tr>
                                             <td>{{ $ctr++ }}</td>
                                             <td>{{ $cart->name }}</td>
@@ -43,6 +41,10 @@
                             </tbody>
                         </table>
                         </div>
+                        @php
+                            $point = Auth::user()->points;
+                        @endphp
+
                         @if ($pengiriman == "express")
                         <p>Pengiriman yang di pilih adalah pengiriman Express maka total akan ditambah Rp. 10,000.</p>
                         @endif
@@ -52,7 +54,23 @@
                             @csrf
                             <input type="submit" name="" class="btn btn-success"id="pay-button"style="float : right"  value="Bayar Sekarang">
                         </form>
-                        @elseif  ($pembayaran == "midtrans")
+                        @elseif  ($pembayaran == "point")
+                            @if ($grandtotal <= 100000)
+                                <p>Your points : {{ $point }} </p>
+                                <p>For this transaction, you must pay <b>10</b> points. </p>
+                                <form action="/pointPayment" method="POST">
+                                    @csrf
+                                    <input type="submit" name="" class="btn btn-success"id="pay-button"style="float : right"  value="Redeem Point">
+                                </form>
+                            @else
+                                <p>In order to redeem points, the maximum transaction is Rp 100,000. </p>
+                                <form action="/showCart" method="POST">
+                                    @csrf
+                                    <input type="submit" name="" class="btn btn-success"id="pay-button"style="float : right"  value="Back to Cart">
+                                </form>
+                            @endif
+
+                        {{-- {@elseif  ($pembayaran == "midtrans")
                         <button id="pay-button" class="btn btn-success" style="float : right">Bayar Sekarang</button>
                         <script type="text/javascript">
                             var payButton = document.getElementById('pay-button');
@@ -60,7 +78,7 @@
                             payButton.addEventListener('click', function () {
                             snap.pay('{{$snap_token}}'); // Replace it with your transaction token
                             });
-                        </script>
+                        </script>} --}}
                         @endif
 
 

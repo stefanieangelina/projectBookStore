@@ -33,9 +33,6 @@
         </tr>
     </thead>
     <tbody>
-        {{-- <?php
-             $transaksi = DB::table('htrans')->select('*')->where('status', 1)->get();
-        ?> --}}
         @foreach ($transaksi as $item)
         <tr>
             <?php
@@ -44,7 +41,13 @@
             <td>{{ $item->id }}</td>
             <td>{{ $user->name }}</td>
             <td>Rp {{ number_format($item->total) }}</td>
-            <td><img src="{{ asset('/storage/BuktiBayar/'.$item->file_bukti) }}" style="width:200px; height:250px"></td>
+            <td>
+                @if ($item->cara_pembayaran == "tidak poin")
+                    <img src="{{ asset('/storage/BuktiBayar/'.$item->file_bukti) }}" style="width:200px; height:250px">
+                @else
+                    Point
+                @endif
+            </td>
             <td>
                 <form method="POST">
                     @csrf

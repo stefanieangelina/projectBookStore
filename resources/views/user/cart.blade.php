@@ -124,13 +124,20 @@
             }
         </script>
 
+        @php
+            $point = Auth::user()->points;
+        @endphp
+
         <div style="margin-right: 5%">
             <br/> <br/> Pilih metode pembayaran :
             <select id="" name="payment">
                 <option value="manual">Transfer ATM</option>
-                <option value="midtrans">Midtrans</option>
+                @if ($point >= 10)
+                    <option value="point">Point</option>
+                @endif
+                {{-- <option value="midtrans">Midtrans</option> --}}
             </select><br><br>
-            <h5> Total : Rp <span id="total">{{ $total }}</span></h5>
+            <h5> Total : Rp <span id="total">{{number_format($total)}}</span></h5>
             <br>
             <input type="hidden" name="temp"value="{{$ctr}}">
             <input type="hidden" id="grandTotal"value="{{$total}}" name="grandtotal">

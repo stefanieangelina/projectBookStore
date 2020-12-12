@@ -155,4 +155,5 @@ Route::get('/fTrans', 'CartController@fTrans');
 
 Route::post('/verify', 'mailController@sendMail');
 Route::post('/manualPayment', 'CartController@manualPayment');
+Route::post('/pointPayment', 'CartController@pointPayment');
 Route::post('/konfirmasi', 'CartController@konfirmasiPayment');
