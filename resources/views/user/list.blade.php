@@ -45,7 +45,7 @@
                                     </button>
                                 @else
                                     <button type="submit" formaction="/user/nonActive/{{$UserArr[$i]->id}}" class="btn btn-danger">
-                                        <i class="	fas fa-minus-circle"></i>
+                                        <i class="fas fa-minus-circle"></i>
                                     </button>
                                 @endif
                             </form>

@@ -33,35 +33,33 @@
         </tr>
     </thead>
     <tbody>
-        <?php 
-             $transaksi = DB::table('htrans')->select('*')->where('status', 1)->get();            
-        ?>
+        {{-- <?php
+             $transaksi = DB::table('htrans')->select('*')->where('status', 1)->get();
+        ?> --}}
         @foreach ($transaksi as $item)
-        
         <tr>
-            <?php 
-                                            
+            <?php
                 $user = DB::table('users')->where('id', $item->user_id)->first();
-        
             ?>
             <td>{{ $item->id }}</td>
             <td>{{ $user->name }}</td>
-            <td>Rp {{ $item->total }}</td>
+            <td>Rp {{ number_format($item->total) }}</td>
+            <td><img src="{{ asset('/storage/BuktiBayar/'.$item->file_bukti) }}" style="width:200px; height:250px"></td>
             <td>
                 <form method="POST">
                     @csrf
-                    <button type="submit" formaction="" class="btn btn-warning">
+                    <button type="submit" formaction="/admin/transaksi/konfirm/{{$item->id}}" class="btn btn-warning">
                         <i class="fas fa-check"></i>
                     </button>
-                    <button type="submit" formaction="" class="btn btn-danger">
-                        <i class="fas fa-trash-alt"></i>
+                    <button type="submit" formaction="/admin/transaksi/tolak/{{$item->id}}" class="btn btn-danger">
+                        <i class="fas fa-minus-circle"></i>
                     </button>
                 </form>
             </td>
         </tr>
         @endforeach
-           
-        
+
+
     </tbody>
 </table>
 @endsection

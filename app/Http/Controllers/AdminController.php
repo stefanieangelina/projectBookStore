@@ -99,7 +99,7 @@ class AdminController extends Controller
         $transArr = htrans::where('status', '0')
                     ->get();
 
-        return \view('admin.listPembayaran', ['userLogin' => $user, 'htrans' => $transArr]);
+        return \view('admin.listPembayaran', ['userLogin' => $user, 'transaksi' => $transArr]);
     }
 
     public function transaksiKonfirm(Request $req, $id){

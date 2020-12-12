@@ -111,7 +111,7 @@ Route::prefix("/admin")->group(function(){
     Route::any('/transaksi', 'AdminController@transaksi');
     Route::any('/transaksi/konfirm/{id}', 'AdminController@transaksiKonfirm');
     Route::any('/transaksi/tolak/{id}', 'AdminController@transaksiTolak');
-    Route::post('/hapusTransaksi', 'AdminController@hapusTransaksi');
+    // Route::post('/hapusTransaksi', 'AdminController@hapusTransaksi');
 });
 
 Route::prefix("/user")->group(function(){

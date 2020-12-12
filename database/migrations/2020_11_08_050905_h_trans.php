@@ -35,6 +35,6 @@ class HTrans extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('htrans');
+        Schema::dropIfExists('h_trans');
     }
 }

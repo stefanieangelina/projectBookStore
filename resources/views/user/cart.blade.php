@@ -95,12 +95,12 @@
 @section('footer')
     <form action="/checkout" method="POST" >
         @csrf
-        <div style="float: left ;margin-left:5% ; text-align :left">
+        <div style="float: right; margin-right:5% ; text-align :left">
             Pilih jenis pengiriman : <br>
             <input type="hidden" name="" id="check" value="0">
-        <input type="radio" name="pengiriman" onclick="biasa()" value="standard"> Standard 3-4 Hari ( Free Ongkir ) <br>
-        <input type="radio" name="pengiriman" onclick="express()"value="express" id=""> Express 1 hari ( + Rp. 10,000 )
-        </div>
+            <input type="radio" name="pengiriman" onclick="biasa()" value="standard"> Standard 3-4 Hari ( Free Ongkir ) <br>
+            <input type="radio" name="pengiriman" onclick="express()"value="express" id=""> Express 1 hari ( + Rp. 10,000 )
+        </div> <br/> <br/>
         <script>
             function biasa(){
                 var check =parseInt(document.getElementById("check").value);
@@ -124,11 +124,8 @@
             }
         </script>
 
-
-
-
         <div style="margin-right: 5%">
-            Pilih metode pembayaran :
+            <br/> <br/> Pilih metode pembayaran :
             <select id="" name="payment">
                 <option value="manual">Transfer ATM</option>
                 <option value="midtrans">Midtrans</option>
