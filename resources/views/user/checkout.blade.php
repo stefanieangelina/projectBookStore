@@ -69,8 +69,8 @@
                                     <input type="submit" name="" class="btn btn-success"id="pay-button"style="float : right"  value="Back to Cart">
                                 </form>
                             @endif
-
-                        {{-- {@elseif  ($pembayaran == "midtrans")
+                        @endif
+                        @if  ($pembayaran == "midtrans")
                         <button id="pay-button" class="btn btn-success" style="float : right">Bayar Sekarang</button>
                         <script type="text/javascript">
                             var payButton = document.getElementById('pay-button');
@@ -78,7 +78,7 @@
                             payButton.addEventListener('click', function () {
                             snap.pay('{{$snap_token}}'); // Replace it with your transaction token
                             });
-                        </script>} --}}
+                        </script>
                         @endif
 
 
