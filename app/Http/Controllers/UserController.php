@@ -39,6 +39,7 @@ class UserController extends Controller
                 ->back();
         }
     }
+
     public function landingPage(Request $req)
     {
         if(Auth::user()->role==='Admin')

@@ -150,7 +150,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="calendar.html">
+                            <a href="/admin/transaksi">
                                 <i class="fas fa-calendar-alt"></i>Transaction Master</a>
                         </li>
                         <li class="active has-sub">

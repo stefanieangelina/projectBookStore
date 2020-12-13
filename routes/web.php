@@ -108,6 +108,10 @@ Route::prefix("/admin")->group(function(){
 
     Route::any('/edit/{id}', 'AdminController@edit');
 
+    Route::any('/transaksi', 'AdminController@transaksi');
+    Route::any('/transaksi/konfirm/{id}', 'AdminController@transaksiKonfirm');
+    Route::any('/transaksi/tolak/{id}', 'AdminController@transaksiTolak');
+    // Route::post('/hapusTransaksi', 'AdminController@hapusTransaksi');
 });
 
 Route::prefix("/user")->group(function(){
@@ -128,21 +132,11 @@ Route::prefix("/vip")->group(function(){
     // halaman list buku
     Route::any('/list', 'VipController@showVip')->name('VipList');
 
+    // me-aktifkan kembali User
+    Route::any('/active/{id}', 'VipController@active');
 
-    // insert Book
-    // Route::any('/insert', 'BookController@insertForm');
-    // Route::any('/insertBook', 'BookController@insertBook');
-
-
-    // // me-aktifkan kembali Book
-    // Route::any('/active/{id}', 'BookController@active');
-
-    // // me-non-aktifkan Book
-    // Route::any('/nonActive/{id}', 'BookController@nonActive');
-
-    // // mengedit Book
-    // Route::any('/editForm/{id}', 'BookController@editForm');
-    // Route::any('/edit/{id}', 'BookController@edit');
+    // me-non-aktifkan User
+    Route::any('/nonActive/{id}', 'VipController@nonActive');
 });
 
 Route::any("/showCart", 'CartController@showCart');
@@ -160,3 +154,6 @@ Route::post('/checkout', 'CartController@checkout');
 Route::get('/fTrans', 'CartController@fTrans');
 
 Route::post('/verify', 'mailController@sendMail');
+Route::post('/manualPayment', 'CartController@manualPayment');
+Route::post('/pointPayment', 'CartController@pointPayment');
+Route::post('/konfirmasi', 'CartController@konfirmasiPayment');

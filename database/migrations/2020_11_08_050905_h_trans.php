@@ -17,6 +17,7 @@ class HTrans extends Migration
             $table->id();
             $table->string('cara_pembayaran',20);
             $table->integer('total');
+            $table->string('file_bukti',255);
             $table->softDeletes();
             $table->timestamps();
             $table->integer('status');
@@ -34,6 +35,6 @@ class HTrans extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('htrans');
+        Schema::dropIfExists('h_trans');
     }
 }

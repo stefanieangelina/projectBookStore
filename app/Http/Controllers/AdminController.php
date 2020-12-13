@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\htrans;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
@@ -88,9 +89,31 @@ class AdminController extends Controller
         $AdminUpdate= User::where('id', $id)
                     ->delete();
 
-                //->update(['status_user' => 0]);
-
         return \redirect()
             ->back();
+    }
+
+    public function transaksi(){
+        $user  = Auth::user()->name;
+
+        $transArr = htrans::where('status', '0')
+                    ->get();
+
+        return \view('admin.listPembayaran', ['userLogin' => $user, 'transaksi' => $transArr]);
+    }
+
+    public function transaksiKonfirm(Request $req, $id){
+        $transUpdate= htrans::where('id', $id)
+                    ->update(['status' => 1]);
+
+        return \redirect()
+                ->back();
+    }
+
+    public function transaksiTolak(Request $req, $id){
+        $transUpdate = htrans::where('id', $id)->delete();
+
+        return \redirect()
+                ->back();
     }
 }
