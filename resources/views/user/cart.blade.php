@@ -30,6 +30,8 @@
             $ctr2 = 1;
         @endphp
         @isset($arrCart)
+        <form action="/checkout" method="POST" >
+            @csrf
             @foreach ($arrCart as $cart)
                 @php
                     $total += ($cart->sell_price - $cart->discount)*$cart->qty;
@@ -40,19 +42,18 @@
                     <td>{{ $cart->name }}</td>
                     <td>Rp. {{ number_format($cart->sell_price - $cart->discount) }}</td>
                     <td>
-                        <form method="" style="margin-left:-8%">
-                            @csrf
-                            <input type="hidden" id="id{{$ctr}}" value="{{$cart->id}}">
-                            <input type="hidden" name="" id="harga{{$ctr2}}" value="{{ $cart->sell_price - $cart->discount }}">
+                            <input type="hidden" id="id" name="id{{$ctr2}}" value="{{$cart->id}}">
+                            <input type="hidden" name="harga" id="harga{{$ctr2}}" value="{{ $cart->sell_price - $cart->discount }}">
                             <button type="button"  class="btn btn-success" onclick="kurang({{$ctr2}})" style="transform:translateX(5px)"> - </button>
-                            <input type="number" name="qty{{$ctr}}" id="jumlah{{$ctr2}}" value="{{ $cart->qty }}" style="width:60px ; text-align : center" >
+                            <input type="number" name="qty{{$ctr2}}" id="jumlah{{$ctr2}}" value="{{ $cart->qty }}" style="width:60px ; text-align : center" >
                             <button type="button" name="btnTambah" onclick="tambah({{$ctr2}})" class="btn btn-success" style="transform:translateX(-25px)"> + </button>
-                        </form>
+                        
                         <script>
                             function tambah(t){
                                 var temp = document.getElementById("jumlah"+t).value;
                                 temp++;
                                 document.getElementById("jumlah"+t).value = temp;
+                                
                                 hitung();
                             }
                             function kurang(t){
@@ -80,10 +81,8 @@
                             @endphp
                     </td>
                     <td>
-                        <form method="post">
-                            @csrf
                             <button formaction="/deleteCart/{{$cart->id}}" class="btn btn-danger">Delete</a></button>
-                        </form>
+                        
                     </td>
                 </tr>
             @endforeach
@@ -93,14 +92,13 @@
 @endsection
 
 @section('footer')
-    <form action="/checkout" method="POST" >
-        @csrf
-        <div style="float: right; margin-right:5% ; text-align :left">
-            Pilih jenis pengiriman : <br>
+
+        <div style="float: left ;margin-left:5% ; text-align :left">
+            <br/> <br/> Pilih metode pembayaran : <br>
             <input type="hidden" name="" id="check" value="0">
-            <input type="radio" name="pengiriman" onclick="biasa()" value="standard"> Standard 3-4 Hari ( Free Ongkir ) <br>
-            <input type="radio" name="pengiriman" onclick="express()"value="express" id=""> Express 1 hari ( + Rp. 10,000 )
-        </div> <br/> <br/>
+        <input type="radio" name="pengiriman" onclick="biasa()" value="standard" checked> Standard 3-4 Hari ( Free Ongkir ) <br>
+        <input type="radio" name="pengiriman" onclick="express()"value="express" id=""> Express 1 hari ( + Rp. 10,000 )
+        </div>
         <script>
             function biasa(){
                 var check =parseInt(document.getElementById("check").value);
@@ -124,12 +122,13 @@
             }
         </script>
 
-        @php
-            $point = Auth::user()->points;
-        @endphp
+
+@php
+$point = Auth::user()->points;
+@endphp 
 
         <div style="margin-right: 5%">
-            <br/> <br/> Pilih metode pembayaran :
+            Pilih metode pembayaran :
             <select id="" name="payment">
                 <option value="manual">Transfer ATM</option>
                 <option value="midtrans">Midtrans</option>
@@ -141,7 +140,7 @@
             <br>
             <input type="hidden" name="temp"value="{{$ctr}}">
             <input type="hidden" id="grandTotal"value="{{$total}}" name="grandtotal">
-            <button class="btn btn-info" style="float: right;"> Checkout </button>
+            <input type="submit" class="btn btn-info" style="float: right;" value="Checkout">
         </div>
 
     </form>
