@@ -9,7 +9,7 @@
     @isset($arrBuku)
         @foreach ($arrBuku as $buku)
             <div class="col-xl-3 col-sm-5 col-11" style="margin:1%">
-                <div class="card" style="max-height: 600px" >
+                <div class="card" style="" >
                     <h1 style="text-align: center;"></h1>
                     <div class="content" style="font-size: 20px">
                         <center><img src="{{ asset('/storage/images/'.$buku->image) }}" style="width:200px; height:250x"></center><br/>
