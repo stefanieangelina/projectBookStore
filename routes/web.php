@@ -16,8 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes(['verify' => true]);
+Route::get('/testingdatachart', 'HomeController@testingchart');
+Route::view('/testingchart', 'testingchart');
 
+
+Auth::routes(['verify' => true]);
 Route::get('/', 'UserController@landingPage')->middleware('auth');
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -89,7 +92,8 @@ Route::prefix("/admin")->group(function(){
 
     Route::any('/list', 'AdminController@showAdmin')->name('AdminList');
 
-
+    // dashboard
+    Route::any('/dashboard', 'AdminController@Dashboard' );
     // insert admin
     Route::any('/insert', 'AdminController@insertForm');
     Route::any('/insertAdmin', 'AdminController@insertAdmin');
