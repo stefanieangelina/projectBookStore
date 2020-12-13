@@ -157,3 +157,7 @@ Route::post('/verify', 'mailController@sendMail');
 Route::post('/manualPayment', 'CartController@manualPayment');
 Route::post('/pointPayment', 'CartController@pointPayment');
 Route::post('/konfirmasi', 'CartController@konfirmasiPayment');
+
+Route::any("/profile", 'HomeController@profil')->name('homeProfile');
+Route::any("/edit", 'HomeController@edit');
+Route::any("/isiProfile", 'HomeController@editProfil');
