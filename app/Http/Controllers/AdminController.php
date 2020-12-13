@@ -15,7 +15,10 @@ class AdminController extends Controller
 
         return \view('admin.insert', ['userLogin' => $user]);
     }
-
+    public function Dashboard(Request $req)
+    {
+        return \view('testingchart');
+    }
     public function insertAdmin(Request $req){
         $newAdmin = new User();
         $newAdmin->name = $req['username'];
@@ -116,4 +119,6 @@ class AdminController extends Controller
         return \redirect()
                 ->back();
     }
+
+
 }

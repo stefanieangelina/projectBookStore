@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Book;
 use App\User;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -33,6 +34,17 @@ class HomeController extends Controller
         return view('home', ['arrBuku'=> $arrBuku]);
     }
 
+    public function testingchart(Request $req){
+        $dataTrans = DB::table('htrans')
+                ->select(DB::raw('month(updated_at) as \'bulan\', COUNT(*) as \'transaksi\''))
+                ->where('status', '=', 1)
+                ->groupBy('bulan')
+                ->get();
+        return $dataTrans;
+    }
+    public function dashboard(){
+        return  \view('testingchart');
+    }
     public function profil(){
         return \view('profil');
     }
