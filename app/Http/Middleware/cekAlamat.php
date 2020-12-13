@@ -21,8 +21,7 @@ class cekAlamat
         foreach ($data as $key) {
             if($key->adress == "")
             {
-
-                dd("kosong");
+                return \redirect("/profile");
             }
         }
         return $next($request);
