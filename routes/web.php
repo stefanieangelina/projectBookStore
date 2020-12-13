@@ -153,7 +153,7 @@ Route::any("/deleteWishlist/{id}", 'WishlistController@deleteWishlist');
 
 Route::any('/search', 'PageController@search');
 
-Route::post('/checkout', 'CartController@checkout');
+Route::post('/checkout', 'CartController@checkout')->middleware('cekAlamat');
 
 Route::get('/fTrans', 'CartController@fTrans');
 
