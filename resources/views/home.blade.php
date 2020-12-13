@@ -46,6 +46,9 @@
     @endisset
 </div>
 @endsection
+@if(Auth::user()->email_verified_at == null)
+    belum verified
+@endif
 
 
 {{-- <div id="container">
