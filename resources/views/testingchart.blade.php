@@ -1,3 +1,8 @@
+@extends('templateadmin')
+
+@section('titlepage')
+    Dashboard
+@endsection
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +18,7 @@
     <title>Dashboard</title>
 </head>
 <body>
-    <canvas id="myChart" width="400" height="400"></canvas>
+    <canvas id="myChart" width="200" height="200"></canvas>
     <script>
         var datas;
         // Mysql -> data [? penjualan] per bulan, int
