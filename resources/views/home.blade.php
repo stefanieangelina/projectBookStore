@@ -5,6 +5,9 @@
 @endsection
 
 @section('content')
+@if(Auth::user()->email_verified_at == null)
+    belum verified
+@endif
 <div class="row" style="width:100%; block;margin: auto;">
     @isset($arrBuku)
         @foreach ($arrBuku as $buku)
@@ -46,9 +49,7 @@
     @endisset
 </div>
 @endsection
-@if(Auth::user()->email_verified_at == null)
-    belum verified
-@endif
+
 
 
 {{-- <div id="container">
