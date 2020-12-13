@@ -52,7 +52,9 @@
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             <strong>{{ Auth::user()->name }}</strong>
                         </a>
-
+                        @if(Auth::user()->email_verified_at == null)
+                        belum verified
+                        @endif
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
