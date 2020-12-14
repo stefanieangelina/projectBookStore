@@ -21,9 +21,12 @@ class cekAlamat
         foreach ($data as $key) {
             if($key->address == "")
             {
+                return $next($request);
+            }else if($key->adress == ""){
                 return \redirect("/profile");
+
             }
         }
-        return $next($request);
+
     }
 }
