@@ -288,9 +288,9 @@ class CartController extends Controller
     public function pointPayment(Request $request){
         $userPoint = Auth::user()->points;
         $userPoint -= 10;
-        $id = Auth::user()->id;
+        $id = Auth::users()->id;
 
-        $user = User::findorFail($id);
+        $user = Users::findorFail($id);
         $user->points = $userPoint;
         $user->save();
 
