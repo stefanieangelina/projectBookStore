@@ -66,7 +66,7 @@ class BookController extends Controller
 
         $user  = Auth::user()->name;
 
-        return \view('Book.edit', ['Book' => $Book,
+        return \view('book.edit', ['Book' => $Book,
                                     'genreArr' => $genreArr,
                                     'userLogin' => $user]);
     }

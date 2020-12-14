@@ -19,7 +19,7 @@ class cekAlamat
         $userId  = Auth::user()->id;
         $data = Users::where('id', $userId)->get();
         foreach ($data as $key) {
-            if($key->adress == "")
+            if($key->address == "")
             {
                 return \redirect("/profile");
             }
