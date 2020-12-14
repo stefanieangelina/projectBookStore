@@ -57,7 +57,7 @@ class HomeController extends Controller
         $input = $req->validate([
             "name" => 'required',
             "alamat" => 'required',
-            "nomer" => 'required|digits:10',
+            "nomer" => 'required|min:10',
         ]);
 
         $id = Auth::user()->id;
